@@ -1,350 +1,549 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZENG — Smart Hydration</title>
+<meta name="description" content="ZENG — Smart water. Smarter life.">
+<title>ZENG | Smart Water Bottle</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
-font-family:Arial,Helvetica,sans-serif;
-background:#06141c;
-color:#fff;
-overflow-x:hidden
+  font-family:Arial,Helvetica,sans-serif;
+  background:#05070b;
+  color:#f5f7fa;
+  line-height:1.6;
+  overflow-x:hidden;
 }
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.container{
+  width:min(1120px,90%);
+  margin:auto;
+}
+
+/* NAVBAR */
 nav{
-position:fixed;
-top:0;
-width:100%;
-z-index:100;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:22px 7%;
-background:rgba(6,20,28,.75);
-backdrop-filter:blur(14px);
-border-bottom:1px solid rgba(255,255,255,.08)
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+  background:rgba(5,7,11,.78);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.07);
 }
+
+.nav-inner{
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
 .logo{
-font-size:30px;
-font-weight:900;
-letter-spacing:4px;
-color:#65e8ff
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:5px;
 }
-nav a{
-color:#d8edf2;
-text-decoration:none;
-margin-left:28px;
-font-size:14px;
-font-weight:bold
-}
-nav a:hover{color:#65e8ff}
 
+.nav-links{
+  display:flex;
+  gap:28px;
+  align-items:center;
+}
+
+.nav-links a{
+  color:#aeb7c5;
+  font-size:14px;
+  transition:.3s;
+}
+
+.nav-links a:hover{
+  color:white;
+}
+
+.nav-btn{
+  padding:10px 18px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:30px;
+  color:white!important;
+}
+
+/* HERO */
 .hero{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:140px 8% 80px;
-background:
-radial-gradient(circle at 75% 45%,rgba(0,200,255,.18),transparent 30%),
-linear-gradient(135deg,#06141c,#092633)
+  min-height:100vh;
+  padding-top:150px;
+  display:flex;
+  align-items:center;
+  position:relative;
 }
-.heroText{max-width:620px}
-.tag{
-display:inline-block;
-padding:8px 15px;
-border:1px solid rgba(101,232,255,.35);
-border-radius:30px;
-color:#65e8ff;
-font-size:12px;
-letter-spacing:2px;
-margin-bottom:22px
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:70px;
+  align-items:center;
 }
-h1{
-font-size:72px;
-line-height:1.02;
-letter-spacing:-3px;
-margin-bottom:25px
+
+.badge{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);
+  color:#b9c2cf;
+  font-size:12px;
+  letter-spacing:1px;
+  margin-bottom:22px;
 }
-h1 span{color:#65e8ff}
+
+.hero h1{
+  font-size:clamp(52px,7vw,88px);
+  line-height:.98;
+  letter-spacing:-4px;
+  max-width:700px;
+}
+
+.hero h1 span{
+  color:#65d9ff;
+}
+
 .hero p{
-font-size:19px;
-line-height:1.7;
-color:#a8c4cc;
-max-width:540px;
-margin-bottom:32px
+  margin:25px 0;
+  max-width:570px;
+  color:#9ca7b6;
+  font-size:18px;
 }
+
+.buttons{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
 .btn{
-display:inline-block;
-padding:15px 27px;
-border-radius:40px;
-background:#65e8ff;
-color:#06202a;
-text-decoration:none;
-font-weight:800;
-transition:.3s
-}
-.btn:hover{
-transform:translateY(-4px);
-box-shadow:0 15px 35px rgba(101,232,255,.25)
+  display:inline-block;
+  padding:14px 23px;
+  border-radius:12px;
+  font-weight:700;
+  transition:.3s;
 }
 
-.product{
-width:330px;
-height:590px;
-margin-right:8%;
-position:relative;
-display:flex;
-justify-content:center;
-align-items:center
+.btn-primary{
+  background:white;
+  color:#05070b;
 }
+
+.btn-primary:hover{
+  transform:translateY(-3px);
+}
+
+.btn-secondary{
+  border:1px solid rgba(255,255,255,.16);
+  color:#dfe5ec;
+}
+
+.btn-secondary:hover{
+  background:rgba(255,255,255,.06);
+}
+
+/* BOTTLE */
+.bottle-area{
+  min-height:540px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+
 .bottle{
-width:210px;
-height:470px;
-border-radius:65px 65px 50px 50px;
-background:linear-gradient(120deg,#dffcff,#8bd9e8 45%,#e9fdff);
-border:4px solid rgba(255,255,255,.7);
-box-shadow:
-0 0 40px rgba(101,232,255,.25),
-inset -20px -20px 40px rgba(0,80,110,.18);
-position:relative;
-animation:float 4s ease-in-out infinite
+  width:205px;
+  height:430px;
+  border-radius:48px 48px 38px 38px;
+  position:relative;
+  background:linear-gradient(110deg,#17202c,#071018 45%,#182430);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:
+    0 40px 100px rgba(0,0,0,.65),
+    inset 10px 0 25px rgba(255,255,255,.04);
+  animation:float 5s ease-in-out infinite;
 }
-.cap{
-position:absolute;
-width:110px;
-height:75px;
-left:46px;
-top:-70px;
-border-radius:25px 25px 10px 10px;
-background:linear-gradient(90deg,#9de5f0,#e9ffff);
-border:4px solid rgba(255,255,255,.7)
+
+.bottle:before{
+  content:"";
+  position:absolute;
+  width:90px;
+  height:45px;
+  left:50%;
+  transform:translateX(-50%);
+  top:-42px;
+  border-radius:12px 12px 6px 6px;
+  background:#101923;
+  border:1px solid rgba(255,255,255,.15);
 }
-.screen{
-position:absolute;
-top:175px;
-left:28px;
-width:150px;
-height:85px;
-border-radius:18px;
-background:#04151d;
-border:2px solid #65e8ff;
-box-shadow:0 0 25px rgba(101,232,255,.25);
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-color:#65e8ff;
-font-weight:bold;
-font-size:13px;
-letter-spacing:1px
+
+.bottle:after{
+  content:"";
+  position:absolute;
+  width:55px;
+  height:8px;
+  left:50%;
+  transform:translateX(-50%);
+  top:7px;
+  border-radius:20px;
+  background:#3c4b59;
 }
-.glow{
-position:absolute;
-width:280px;
-height:280px;
-border-radius:50%;
-background:rgba(101,232,255,.12);
-filter:blur(40px);
-z-index:-1
+
+.bottle-screen{
+  position:absolute;
+  width:125px;
+  height:85px;
+  left:50%;
+  top:130px;
+  transform:translateX(-50%);
+  border-radius:16px;
+  border:1px solid rgba(101,217,255,.4);
+  background:#07131a;
+  box-shadow:0 0 35px rgba(101,217,255,.13);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
 }
+
+.bottle-screen strong{
+  font-size:25px;
+  color:#65d9ff;
+}
+
+.bottle-screen small{
+  color:#8093a2;
+  font-size:10px;
+}
+
+.bottle-light{
+  position:absolute;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#65d9ff;
+  box-shadow:0 0 18px #65d9ff;
+  left:50%;
+  transform:translateX(-50%);
+  top:250px;
+}
+
 @keyframes float{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-15px)}
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-18px)}
 }
 
-section{padding:110px 8%}
-.sectionHead{
-text-align:center;
-max-width:700px;
-margin:0 auto 60px
-}
-.sectionHead h2{
-font-size:46px;
-margin-bottom:15px
-}
-.sectionHead p{
-color:#9db8c0;
-line-height:1.7
+/* SECTIONS */
+section{
+  padding:110px 0;
 }
 
-.features{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:25px
+.section-label{
+  color:#65d9ff;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:12px;
 }
+
+.section-title{
+  font-size:clamp(35px,5vw,58px);
+  letter-spacing:-2px;
+  line-height:1.05;
+  max-width:700px;
+}
+
+.section-text{
+  color:#909baa;
+  max-width:650px;
+  margin-top:18px;
+}
+
+/* PROBLEM */
+.problem{
+  background:#080b10;
+}
+
+.problem-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+  margin-top:55px;
+}
+
+.problem-card{
+  padding:32px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  background:rgba(255,255,255,.025);
+}
+
+.problem-card h3{
+  font-size:23px;
+  margin-bottom:10px;
+}
+
+.problem-card p{
+  color:#909baa;
+}
+
+/* FEATURES */
+.features-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:55px;
+}
+
 .card{
-background:linear-gradient(145deg,#0c2733,#081b24);
-border:1px solid rgba(255,255,255,.08);
-border-radius:24px;
-padding:35px;
-transition:.35s
+  padding:32px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+  transition:.3s;
 }
+
 .card:hover{
-transform:translateY(-10px);
-border-color:rgba(101,232,255,.4);
-box-shadow:0 20px 50px rgba(0,0,0,.25)
+  transform:translateY(-7px);
+  border-color:rgba(101,217,255,.3);
 }
+
 .icon{
-font-size:40px;
-margin-bottom:22px
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(101,217,255,.09);
+  margin-bottom:24px;
+  font-size:22px;
 }
+
 .card h3{
-font-size:23px;
-margin-bottom:12px
+  font-size:21px;
+  margin-bottom:10px;
 }
+
 .card p{
-color:#9db8c0;
-line-height:1.7
+  color:#909baa;
+  font-size:14px;
 }
 
+/* TECHNOLOGY */
 .tech{
-background:#081d26
-}
-.techGrid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:30px
-}
-.techBox{
-padding:40px;
-border-radius:25px;
-background:#0c2834;
-border:1px solid rgba(255,255,255,.07)
-}
-.techBox h3{
-font-size:26px;
-margin-bottom:15px;
-color:#65e8ff
-}
-.techBox p{
-color:#a8c4cc;
-line-height:1.8
+  background:#080b10;
 }
 
+.tech-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  margin-top:55px;
+}
+
+.tech-item{
+  padding:28px;
+  border-left:2px solid #65d9ff;
+  background:rgba(255,255,255,.025);
+  border-radius:0 18px 18px 0;
+}
+
+.tech-item h3{
+  margin-bottom:7px;
+}
+
+.tech-item p{
+  color:#909baa;
+  font-size:14px;
+}
+
+/* HOW IT WORKS */
 .steps{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:20px
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  margin-top:55px;
 }
+
 .step{
-text-align:center;
-padding:30px 20px
+  padding:28px 20px;
+  border-top:1px solid rgba(255,255,255,.14);
 }
-.number{
-width:55px;
-height:55px;
-margin:0 auto 20px;
-border-radius:50%;
-background:#65e8ff;
-color:#06202a;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:900;
-font-size:20px
+
+.step-number{
+  color:#65d9ff;
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:20px;
 }
-.step h3{margin-bottom:10px}
+
+.step h3{
+  margin-bottom:8px;
+}
+
 .step p{
-color:#91adb6;
-line-height:1.6
+  color:#909baa;
+  font-size:14px;
 }
 
+/* MISSION */
 .mission{
-text-align:center;
-background:
-radial-gradient(circle at center,rgba(101,232,255,.14),transparent 35%),
-#06141c
+  text-align:center;
 }
-.mission h2{
-font-size:50px;
-max-width:850px;
-margin:auto auto 25px
+
+.mission .section-title{
+  margin:auto;
 }
+
 .mission p{
-max-width:700px;
-margin:auto;
-color:#a8c4cc;
-line-height:1.8;
-font-size:18px
+  margin:22px auto 30px;
+  color:#909baa;
+  max-width:680px;
 }
 
+/* EARLY ACCESS */
+.access{
+  background:linear-gradient(145deg,#0a1118,#071019);
+}
+
+.access-box{
+  border:1px solid rgba(101,217,255,.18);
+  border-radius:28px;
+  padding:65px 30px;
+  text-align:center;
+}
+
+.access-box p{
+  max-width:600px;
+  margin:18px auto 28px;
+  color:#929eac;
+}
+
+/* FAQ */
 .faq{
-max-width:850px;
-margin:auto
+  max-width:800px;
+  margin:50px auto 0;
 }
+
 details{
-background:#0c2733;
-margin-bottom:15px;
-padding:22px 25px;
-border-radius:15px;
-border:1px solid rgba(255,255,255,.07)
+  border-bottom:1px solid rgba(255,255,255,.09);
+  padding:20px 0;
 }
+
 summary{
-cursor:pointer;
-font-weight:bold
+  cursor:pointer;
+  font-weight:700;
 }
+
 details p{
-color:#9db8c0;
-padding-top:15px;
-line-height:1.7
+  color:#929eac;
+  padding-top:12px;
 }
 
-.cta{
-margin:80px 8%;
-padding:80px 30px;
-border-radius:30px;
-text-align:center;
-background:linear-gradient(135deg,#0d3442,#09222c);
-border:1px solid rgba(101,232,255,.2)
-}
-.cta h2{
-font-size:45px;
-margin-bottom:15px
-}
-.cta p{
-color:#a8c4cc;
-margin-bottom:30px
-}
-
+/* FOOTER */
 footer{
-padding:45px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-top:1px solid rgba(255,255,255,.08);
-color:#75929b
+  padding:45px 0;
+  border-top:1px solid rgba(255,255,255,.07);
 }
-footer strong{color:#65e8ff;letter-spacing:3px}
 
-@media(max-width:900px){
-nav{padding:18px 5%}
-nav div:last-child{display:none}
-.hero{
-flex-direction:column;
-text-align:center;
-padding-top:130px
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:#7e8997;
+  font-size:13px;
 }
-h1{font-size:52px}
-.hero p{margin-left:auto;margin-right:auto}
-.product{
-margin:80px 0 20px;
-transform:scale(.85)
+
+.footer-logo{
+  color:white;
+  font-weight:900;
+  letter-spacing:4px;
 }
-.features,.steps,.techGrid{
-grid-template-columns:1fr
+
+/* MOBILE */
+@media(max-width:850px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero{
+    padding-top:120px;
+  }
+
+  .hero-grid{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .hero p{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .buttons{
+    justify-content:center;
+  }
+
+  .bottle-area{
+    min-height:470px;
+  }
+
+  .features-grid,
+  .problem-grid,
+  .tech-grid{
+    grid-template-columns:1fr;
+  }
+
+  .steps{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .footer-inner{
+    flex-direction:column;
+    text-align:center;
+  }
 }
-.sectionHead h2{font-size:36px}
-.mission h2{font-size:38px}
-.cta h2{font-size:34px}
-footer{
-flex-direction:column;
-gap:15px;
-text-align:center
-}
+
+@media(max-width:500px){
+
+  .hero h1{
+    font-size:48px;
+  }
+
+  section{
+    padding:80px 0;
+  }
+
+  .steps{
+    grid-template-columns:1fr;
+  }
+
+  .bottle{
+    transform:scale(.88);
+  }
 }
 </style>
 </head>
@@ -352,242 +551,338 @@ text-align:center
 <body>
 
 <nav>
-<div class="logo">ZENG</div>
-<div>
-<a href="#features">Features</a>
-<a href="#technology">Technology</a>
-<a href="#how">How It Works</a>
-<a href="#faq">FAQ</a>
-</div>
+  <div class="container nav-inner">
+    <div class="logo">ZENG</div>
+
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#technology">Technology</a>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+      <a href="#access" class="nav-btn">Early Access</a>
+    </div>
+  </div>
 </nav>
 
+<main>
+
+<!-- HERO -->
 <section class="hero">
+  <div class="container hero-grid">
 
-<div class="heroText">
-<div class="tag">THE FUTURE OF HYDRATION</div>
+    <div>
+      <div class="badge">SMART HYDRATION • COMING SOON</div>
 
-<h1>Smart water.<br><span>Smarter life.</span></h1>
+      <h1>
+        Smart water.<br>
+        <span>Smarter life.</span>
+      </h1>
 
-<p>
-Meet Zeng — a smart bottle concept designed to bring
-cleaner, smarter and more connected hydration into everyday life.
-</p>
+      <p>
+        ZENG is a next-generation smart water bottle designed to bring
+        intelligent cleaning, hydration awareness and useful information
+        into your everyday routine.
+      </p>
 
-<a href="#features" class="btn">Explore Zeng →</a>
-</div>
+      <div class="buttons">
+        <a href="#access" class="btn btn-primary">Get Early Access</a>
+        <a href="#features" class="btn btn-secondary">Explore ZENG</a>
+      </div>
+    </div>
 
-<div class="product">
-<div class="glow"></div>
-<div class="bottle">
-<div class="cap"></div>
-<div class="screen">
-ZENG<br>
-SMART HYDRATION
-</div>
-</div>
-</div>
+    <div class="bottle-area">
+      <div class="bottle">
+        <div class="bottle-screen">
+          <strong>24°C</strong>
+          <small>SMART WATER</small>
+        </div>
+        <div class="bottle-light"></div>
+      </div>
+    </div>
 
+  </div>
 </section>
 
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="container">
+
+    <div class="section-label">The Problem</div>
+
+    <h2 class="section-title">
+      Water bottles haven't evolved enough.
+    </h2>
+
+    <p class="section-text">
+      We carry water every day, but most bottles simply store it.
+      ZENG is designed to make the bottle itself smarter.
+    </p>
+
+    <div class="problem-grid">
+
+      <div class="problem-card">
+        <h3>💧 Everyday Hydration</h3>
+        <p>
+          Staying aware of your water intake can be difficult
+          during busy school, work, travel and fitness routines.
+        </p>
+      </div>
+
+      <div class="problem-card">
+        <h3>🧼 Bottle Hygiene</h3>
+        <p>
+          A reusable bottle needs regular cleaning. ZENG is designed
+          around a smarter approach to everyday bottle hygiene.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
 <section id="features">
+  <div class="container">
 
-<div class="sectionHead">
-<h2>Why Zeng?</h2>
-<p>
-A modern approach to the everyday water bottle.
-Designed around technology, convenience and smarter hydration.
-</p>
-</div>
+    <div class="section-label">Features</div>
 
-<div class="features">
+    <h2 class="section-title">
+      One bottle. A smarter experience.
+    </h2>
 
-<div class="card">
-<div class="icon">✨</div>
-<h3>Smart Cleaning</h3>
-<p>
-Zeng is designed around UV-C technology to support
-a cleaner bottle and water experience.
-</p>
-</div>
+    <p class="section-text">
+      ZENG combines intelligent electronics and a modern bottle design
+      to create a connected hydration experience.
+    </p>
 
-<div class="card">
-<div class="icon">💧</div>
-<h3>Smart Hydration</h3>
-<p>
-Stay more aware of your hydration with a bottle designed
-to make everyday drinking smarter.
-</p>
-</div>
+    <div class="features-grid">
 
-<div class="card">
-<div class="icon">🌡️</div>
-<h3>Smart Information</h3>
-<p>
-A built-in display concept keeps useful information
-within easy reach.
-</p>
-</div>
+      <div class="card">
+        <div class="icon">🧼</div>
+        <h3>Smart Cleaning</h3>
+        <p>
+          Designed around UV-C technology to support a cleaner bottle
+          experience with a simple activation process.
+        </p>
+      </div>
 
-</div>
+      <div class="card">
+        <div class="icon">💧</div>
+        <h3>Smart Hydration</h3>
+        <p>
+          Sensor-based technology can help turn everyday hydration
+          into a more informed routine.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📱</div>
+        <h3>Smart Information</h3>
+        <p>
+          A digital interface brings useful information directly
+          onto the bottle instead of requiring another device.
+        </p>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<section class="tech" id="technology">
+<!-- TECHNOLOGY -->
+<section id="technology" class="tech">
+  <div class="container">
 
-<div class="sectionHead">
-<h2>Technology Inside Zeng</h2>
-<p>
-Bringing electronics and intelligent design together
-inside a portable everyday bottle.
-</p>
-</div>
+    <div class="section-label">Technology</div>
 
-<div class="techGrid">
+    <h2 class="section-title">
+      Built for intelligent everyday use.
+    </h2>
 
-<div class="techBox">
-<h3>UV-C Technology</h3>
-<p>
-Zeng's concept incorporates UV-C LED technology
-for bottle and water sanitation support.
-</p>
-</div>
+    <div class="tech-grid">
 
-<div class="techBox">
-<h3>Smart Sensors</h3>
-<p>
-Sensor technology can help collect useful information
-for a more intelligent hydration experience.
-</p>
-</div>
+      <div class="tech-item">
+        <h3>UV-C Technology</h3>
+        <p>
+          A UV-C based cleaning system is being designed to help
+          support bottle hygiene.
+        </p>
+      </div>
 
-<div class="techBox">
-<h3>Digital Display</h3>
-<p>
-A compact display concept allows important information
-to be visible directly on the bottle.
-</p>
-</div>
+      <div class="tech-item">
+        <h3>Smart Sensors</h3>
+        <p>
+          Embedded sensors can collect useful information and
+          enable smarter bottle interactions.
+        </p>
+      </div>
 
-<div class="techBox">
-<h3>Compact Electronics</h3>
-<p>
-The electronics are designed around portability,
-convenience and everyday usability.
-</p>
-</div>
+      <div class="tech-item">
+        <h3>Digital Display</h3>
+        <p>
+          A compact display concept can show selected bottle
+          information in real time.
+        </p>
+      </div>
 
-</div>
+      <div class="tech-item">
+        <h3>Compact Electronics</h3>
+        <p>
+          Electronics are designed to fit naturally into the
+          bottle architecture without compromising usability.
+        </p>
+      </div>
+
+    </div>
+  </div>
 </section>
 
+<!-- HOW -->
 <section id="how">
+  <div class="container">
 
-<div class="sectionHead">
-<h2>How Zeng Works</h2>
-<p>A simple experience powered by smart technology.</p>
-</div>
+    <div class="section-label">How It Works</div>
 
-<div class="steps">
+    <h2 class="section-title">
+      Simple by design.
+    </h2>
 
-<div class="step">
-<div class="number">01</div>
-<h3>Fill</h3>
-<p>Fill your Zeng Bottle with water.</p>
-</div>
+    <div class="steps">
 
-<div class="step">
-<div class="number">02</div>
-<h3>Activate</h3>
-<p>Activate the smart cleaning system.</p>
-</div>
+      <div class="step">
+        <div class="step-number">01</div>
+        <h3>Fill</h3>
+        <p>Fill your ZENG bottle with water.</p>
+      </div>
 
-<div class="step">
-<div class="number">03</div>
-<h3>Clean</h3>
-<p>Let the technology support the cleaning process.</p>
-</div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <h3>Activate</h3>
+        <p>Activate the smart cleaning system.</p>
+      </div>
 
-<div class="step">
-<div class="number">04</div>
-<h3>Hydrate</h3>
-<p>Enjoy a smarter everyday hydration experience.</p>
-</div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <h3>Clean</h3>
+        <p>The designed UV-C system runs its cleaning cycle.</p>
+      </div>
 
-</div>
+      <div class="step">
+        <div class="step-number">04</div>
+        <h3>Hydrate</h3>
+        <p>Carry, drink and stay informed throughout your day.</p>
+      </div>
+
+    </div>
+  </div>
 </section>
 
+<!-- MISSION -->
 <section class="mission">
+  <div class="container">
 
-<h2>We believe water bottles should do more.</h2>
+    <div class="section-label">Our Mission</div>
 
-<p>
-Zeng is being created with one simple vision:
-make everyday hydration cleaner, smarter and more meaningful
-through thoughtful technology and design.
-</p>
+    <h2 class="section-title">
+      Make everyday hydration smarter.
+    </h2>
 
+    <p>
+      ZENG is being built with one simple idea:
+      technology should quietly make everyday habits better.
+    </p>
+
+    <a href="#access" class="btn btn-primary">Join ZENG</a>
+
+  </div>
 </section>
 
+<!-- EARLY ACCESS -->
+<section id="access" class="access">
+  <div class="container">
+
+    <div class="access-box">
+
+      <div class="section-label">Coming Soon</div>
+
+      <h2 class="section-title">
+        Be first to experience ZENG.
+      </h2>
+
+      <p>
+        Join the early-access list and stay updated on the
+        ZENG bottle launch, prototype progress and future updates.
+      </p>
+
+      <a
+        class="btn btn-primary"
+        href="mailto:zengbottles@gmail.com?subject=ZENG%20Early%20Access"
+      >
+        Request Early Access
+      </a>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
 <section id="faq">
+  <div class="container">
 
-<div class="sectionHead">
-<h2>Frequently Asked Questions</h2>
-<p>Some quick answers about the Zeng concept.</p>
-</div>
+    <div class="section-label">FAQ</div>
 
-<div class="faq">
+    <h2 class="section-title">
+      Questions, answered.
+    </h2>
 
-<details>
-<summary>What is Zeng Bottle?</summary>
-<p>
-Zeng is a smart water bottle concept focused on
-hydration, smart technology and bottle-cleaning support.
-</p>
-</details>
+    <div class="faq">
 
-<details>
-<summary>Does Zeng use UV-C technology?</summary>
-<p>
-Yes. The current concept includes UV-C LED technology
-intended to support sanitation.
-</p>
-</details>
+      <details>
+        <summary>What is ZENG?</summary>
+        <p>
+          ZENG is a smart water bottle concept focused on intelligent
+          cleaning, hydration awareness and useful bottle information.
+        </p>
+      </details>
 
-<details>
-<summary>Is Zeng available to buy?</summary>
-<p>
-Zeng is currently being developed. Product availability
-and final specifications will be announced as development progresses.
-</p>
-</details>
+      <details>
+        <summary>Is ZENG available to buy?</summary>
+        <p>
+          ZENG is currently being developed. Launch and availability
+          details will be announced as the product progresses.
+        </p>
+      </details>
 
-<details>
-<summary>Can I become an early supporter?</summary>
-<p>
-Yes. Follow the Zeng project for future product,
-prototype and early-access announcements.
-</p>
-</details>
+      <details>
+        <summary>What technology does ZENG use?</summary>
+        <p>
+          The concept includes UV-C technology, sensors, electronics
+          and a compact digital interface.
+        </p>
+      </details>
 
-</div>
+      <details>
+        <summary>When will ZENG launch?</summary>
+        <p>
+          The launch date has not been finalized yet. Join early access
+          to receive future updates.
+        </p>
+      </details>
+
+    </div>
+  </div>
 </section>
 
-<div class="cta">
-
-<h2>Be part of the Zeng journey.</h2>
-
-<p>
-The future of hydration is being built now.
-</p>
-
-<a href="mailto:hello@zengbottle.com" class="btn">
-Contact Zeng →
-</a>
-
-</div>
+</main>
 
 <footer>
-<strong>ZENG</strong>
-<span>Smart Water. Smarter Life. © 2026</span>
+  <div class="container footer-inner">
+    <div class="footer-logo">ZENG</div>
+    <div>Smart water. Smarter life.</div>
+    <div>© 2026 ZENG. All rights reserved.</div>
+  </div>
 </footer>
 
 </body>
 </html>
+```
