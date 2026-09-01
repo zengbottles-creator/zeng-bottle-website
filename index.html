@@ -1,1 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zeng Bottle | Smart Water, Smarter Life</title>
 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5fbff;
+      color: #102a43;
+      line-height: 1.6;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #087ea4;
+    }
+
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: #102a43;
+      font-weight: 600;
+    }
+
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 70px 8%;
+      gap: 50px;
+    }
+
+    .hero-text {
+      max-width: 600px;
+    }
+
+    .hero h1 {
+      font-size: 60px;
+      line-height: 1.1;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #08a6c7;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: #526777;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: #08a6c7;
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    .bottle {
+      width: 260px;
+      height: 500px;
+      border-radius: 55px 55px 45px 45px;
+      background: linear-gradient(145deg, #ffffff, #dff7ff);
+      border: 5px solid #9bdbea;
+      box-shadow: 0 30px 60px rgba(0,130,170,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: auto;
+    }
+
+    .bottle::before {
+      content: "";
+      position: absolute;
+      top: -65px;
+      width: 115px;
+      height: 70px;
+      background: #d7f4fa;
+      border: 5px solid #9bdbea;
+      border-radius: 25px 25px 10px 10px;
+    }
+
+    .bottle-screen {
+      width: 150px;
+      height: 90px;
+      background: #102a43;
+      color: #69e8ff;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: inset 0 0 20px rgba(0,200,255,0.3);
+    }
+
+    section {
+      padding: 80px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: #627d98;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .icon {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .card p {
+      color: #627d98;
+    }
+
+    .how {
+      background: #e8f9fd;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #08a6c7;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .cta {
+      text-align: center;
+      background: #102a43;
+      color: white;
+      border-radius: 25px;
+      margin: 70px 8%;
+      padding: 70px 20px;
+    }
+
+    .cta p {
+      color: #d9e7ef;
+      margin: 15px auto 30px;
+      max-width: 600px;
+    }
+
+    footer {
+      background: #071b2d;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    footer p {
+      color: #a9c1d1;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .cards,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">ZENG</div>
+
+    <div>
+      <a href="#features">Features</a>
+      <a href="#technology">Technology</a>
+      <a href="#how">How It Works</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Meet the future of <span>smart hydration.</span></h1>
+
+      <p>
+        Zeng is a smart water bottle designed to make hydration
+        smarter, cleaner and more connected.
+      </p>
+
+      <a href="#contact" class="btn">Join the Zeng Journey</a>
+    </div>
+
+    <div class="bottle">
+      <div class="bottle-screen">
+        ZENG<br>
+        SMART HYDRATION
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="section-title">
+      <h2>Why Zeng?</h2>
+      <p>More than a bottle. It's a smarter hydration experience.</p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">💧</div>
+        <h3>Smart Hydration</h3>
+        <p>
+          Designed to help users stay aware of their hydration
+          throughout the day.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">✨</div>
+        <h3>Self-Cleaning</h3>
+        <p>
+          Integrated UV-C technology is designed to help
+          sanitize the water and bottle interior.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🌡️</div>
+        <h3>Smart Display</h3>
+        <p>
+          A smart display concept keeps useful information
+          visible while you stay hydrated.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="technology">
+    <div class="section-title">
+      <h2>Built With Smart Technology</h2>
+      <p>Technology designed around everyday hydration.</p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">🔬</div>
+        <h3>UV-C Technology</h3>
+        <p>
+          UV-C LEDs are integrated into the concept to support
+          bottle and water sanitation.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>Smart Sensors</h3>
+        <p>
+          Sensor technology can collect useful hydration-related
+          information for the smart bottle experience.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Efficient Design</h3>
+        <p>
+          Compact electronics and intelligent controls are
+          designed around portability and convenience.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="how" class="how">
+    <div class="section-title">
+      <h2>How Zeng Works</h2>
+      <p>A simple idea powered by smart technology.</p>
+    </div>
+
+    <div class="steps">
+
+      <div>
+        <div class="step-number">1</div>
+        <h3>Fill</h3>
+        <p>Fill your Zeng Bottle with water.</p>
+      </div>
+
+      <div>
+        <div class="step-number">2</div>
+        <h3>Activate</h3>
+        <p>Activate the smart cleaning system.</p>
+      </div>
+
+      <div>
+        <div class="step-number">3</div>
+        <h3>Hydrate</h3>
+        <p>Enjoy a smarter hydration experience.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="contact" class="cta">
+    <h2>Be Part of the Zeng Revolution</h2>
+
+    <p>
+      Zeng is building a smarter way to experience everyday hydration.
+      Stay connected with our journey.
+    </p>
+
+    <a href="mailto:hello@zengbottle.com" class="btn">
+      Contact Zeng
+    </a>
+  </div>
+
+  <footer>
+    <h3>ZENG BOTTLE</h3>
+    <p>Smart Water. Smarter Life.</p>
+    <br>
+    <p>© 2026 Zeng Bottle. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
