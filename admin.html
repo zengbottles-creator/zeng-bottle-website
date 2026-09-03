@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZENG — Admin Dashboard</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:#05070a;
+  color:#f5f7fa;
+  line-height:1.5;
+}
+
+button,input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.header{
+  border-bottom:1px solid rgba(255,255,255,.09);
+  background:rgba(5,7,10,.9);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+  min-height:75px;
+  padding:15px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:4px;
+}
+
+.logo span{
+  color:#7ee7ff;
+}
+
+.admin-label{
+  color:#9aa5b1;
+  font-size:13px;
+}
+
+.logout{
+  border:1px solid rgba(255,255,255,.12);
+  background:#10151b;
+  color:white;
+  padding:10px 16px;
+  border-radius:999px;
+}
+
+.logout:hover{
+  background:#181f27;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:45px 24px 80px;
+}
+
+h1{
+  font-size:clamp(35px,6vw,65px);
+  letter-spacing:-3px;
+  line-height:1;
+  margin-bottom:12px;
+}
+
+.subtitle{
+  color:#9aa5b1;
+  margin-bottom:40px;
+}
+
+.login-card,
+.panel{
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.035);
+  border-radius:24px;
+  padding:30px;
+}
+
+.login-card{
+  max-width:500px;
+  margin:80px auto;
+}
+
+.login-card h2{
+  margin-bottom:25px;
+}
+
+.field{
+  margin-bottom:16px;
+}
+
+.field label{
+  display:block;
+  color:#aeb7c0;
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+.field input{
+  width:100%;
+  padding:13px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.1);
+  background:#080c11;
+  color:white;
+  outline:none;
+}
+
+.field input:focus{
+  border-color:#7ee7ff;
+}
+
+.primary{
+  width:100%;
+  border:0;
+  border-radius:999px;
+  padding:14px 20px;
+  background:white;
+  color:#05070a;
+  font-weight:800;
+}
+
+.primary:hover{
+  transform:translateY(-1px);
+}
+
+.message{
+  margin-top:15px;
+  font-size:13px;
+  color:#7ee7ff;
+  display:none;
+}
+
+.error{
+  color:#ff8d8d;
+}
+
+.dashboard{
+  display:none;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-bottom:30px;
+}
+
+.stat{
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.035);
+  border-radius:20px;
+  padding:25px;
+}
+
+.stat-number{
+  font-size:38px;
+  font-weight:900;
+  color:#7ee7ff;
+}
+
+.stat-title{
+  color:#9aa5b1;
+  font-size:13px;
+}
+
+.panel{
+  margin-bottom:25px;
+  overflow:hidden;
+}
+
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+
+.panel h2{
+  font-size:24px;
+}
+
+.refresh{
+  border:1px solid rgba(255,255,255,.1);
+  background:#0b1016;
+  color:white;
+  padding:9px 15px;
+  border-radius:999px;
+}
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px;
+}
+
+th,
+td{
+  padding:13px 12px;
+  text-align:left;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  font-size:13px;
+}
+
+th{
+  color:#7ee7ff;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+td{
+  color:#cbd2da;
+}
+
+.empty{
+  color:#697581;
+  padding:20px 0;
+}
+
+.status{
+  margin-bottom:20px;
+  padding:13px 15px;
+  border-radius:12px;
+  background:rgba(126,231,255,.06);
+  border:1px solid rgba(126,231,255,.12);
+  color:#7ee7ff;
+  display:none;
+}
+
+@media(max-width:700px){
+
+.header-inner{
+  align-items:flex-start;
+}
+
+.stats{
+  grid-template-columns:1fr;
+}
+
+.container{
+  padding:30px 16px 60px;
+}
+
+.panel{
+  padding:20px;
+}
+
+h1{
+  letter-spacing:-2px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-inner">
+
+    <div>
+      <div class="logo">ZEN<span>G</span></div>
+      <div class="admin-label">Admin Dashboard</div>
+    </div>
+
+    <button
+      class="logout"
+      id="logoutBtn"
+      style="display:none;"
+      onclick="logout()">
+      Logout
+    </button>
+
+  </div>
+</header>
+
+
+<!-- LOGIN -->
+
+<section id="loginSection">
+
+  <div class="login-card">
+
+    <h2>Admin Login</h2>
+
+    <div class="field">
+
+      <label>Email</label>
+
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="Admin email"
+        autocomplete="email">
+
+    </div>
+
+    <div class="field">
+
+      <label>Password</label>
+
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Admin password"
+        autocomplete="current-password">
+
+    </div>
+
+    <button
+      class="primary"
+      onclick="login()">
+
+      Login to Dashboard →
+
+    </button>
+
+    <div
+      class="message"
+      id="loginMessage">
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section
+  class="dashboard"
+  id="dashboard">
+
+  <div class="container">
+
+    <h1>ZENG Dashboard</h1>
+
+    <p class="subtitle">
+      Manage early-access requests, customer feedback and bottle configurations.
+    </p>
+
+    <div
+      class="status"
+      id="statusMessage">
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+      <div class="stat">
+
+        <div
+          class="stat-number"
+          id="earlyCount">
+          0
+        </div>
+
+        <div class="stat-title">
+          Early Access
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div
+          class="stat-number"
+          id="feedbackCount">
+          0
+        </div>
+
+        <div class="stat-title">
+          Feedback
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div
+          class="stat-number"
+          id="configCount">
+          0
+        </div>
+
+        <div class="stat-title">
+          Configurations
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- EARLY ACCESS -->
+
+    <div class="panel">
+
+      <div class="panel-head">
+
+        <h2>Early Access Requests</h2>
+
+        <button
+          class="refresh"
+          onclick="loadDashboard()">
+          Refresh
+        </button>
+
+      </div>
+
+      <div
+        class="table-wrap"
+        id="earlyTable">
+      </div>
+
+    </div>
+
+
+    <!-- FEEDBACK -->
+
+    <div class="panel">
+
+      <div class="panel-head">
+
+        <h2>Customer Feedback</h2>
+
+      </div>
+
+      <div
+        class="table-wrap"
+        id="feedbackTable">
+      </div>
+
+    </div>
+
+
+    <!-- CONFIGURATIONS -->
+
+    <div class="panel">
+
+      <div class="panel-head">
+
+        <h2>Build Your ZENG Requests</h2>
+
+      </div>
+
+      <div
+        class="table-wrap"
+        id="configTable">
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+"https://idfvaqmhgdcyglbvlkay.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_0E2drrhzyIJjG-kcb0aWag_ZNrnj_H1";
+
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+
+/* ============================
+   LOGIN
+============================ */
+
+async function login(){
+
+  const email =
+    document.getElementById("loginEmail")
+    .value
+    .trim();
+
+  const password =
+    document.getElementById("loginPassword")
+    .value;
+
+  const message =
+    document.getElementById("loginMessage");
+
+  message.style.display="block";
+  message.className="message";
+  message.textContent="Signing in...";
+
+  if(!email || !password){
+
+    message.className="message error";
+    message.textContent=
+      "Please enter email and password.";
+
+    return;
+  }
+
+  const {data,error} =
+    await supabaseClient.auth.signInWithPassword({
+      email:email,
+      password:password
+    });
+
+  if(error){
+
+    console.error(error);
+
+    message.className="message error";
+    message.textContent=
+      "Login failed. Please check your email and password.";
+
+    return;
+  }
+
+  message.style.display="none";
+
+  showDashboard();
+
+}
+
+
+/* ============================
+   SHOW DASHBOARD
+============================ */
+
+function showDashboard(){
+
+  document
+    .getElementById("loginSection")
+    .style.display="none";
+
+  document
+    .getElementById("dashboard")
+    .style.display="block";
+
+  document
+    .getElementById("logoutBtn")
+    .style.display="block";
+
+  loadDashboard();
+
+}
+
+
+/* ============================
+   LOGOUT
+============================ */
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  document
+    .getElementById("dashboard")
+    .style.display="none";
+
+  document
+    .getElementById("loginSection")
+    .style.display="block";
+
+  document
+    .getElementById("logoutBtn")
+    .style.display="none";
+
+}
+
+
+/* ============================
+   DASHBOARD DATA
+============================ */
+
+async function loadDashboard(){
+
+  const status =
+    document.getElementById("statusMessage");
+
+  status.style.display="block";
+  status.textContent="Loading dashboard data...";
+
+
+  const earlyResult =
+    await supabaseClient
+      .from("zeng_early_access")
+      .select("*")
+      .order("id",{ascending:false});
+
+
+  const feedbackResult =
+    await supabaseClient
+      .from("zeng_feedback")
+      .select("*")
+      .order("id",{ascending:false});
+
+
+  const configResult =
+    await supabaseClient
+      .from("zeng_configurations")
+      .select("*")
+      .order("id",{ascending:false});
+
+
+  if(
+    earlyResult.error ||
+    feedbackResult.error ||
+    configResult.error
+  ){
+
+    console.error(
+      earlyResult.error,
+      feedbackResult.error,
+      configResult.error
+    );
+
+    status.className="status error";
+
+    status.textContent=
+      "Could not load dashboard data. Check database policies.";
+
+    return;
+  }
+
+
+  document.getElementById("earlyCount")
+    .textContent=earlyResult.data.length;
+
+  document.getElementById("feedbackCount")
+    .textContent=feedbackResult.data.length;
+
+  document.getElementById("configCount")
+    .textContent=configResult.data.length;
+
+
+  renderEarlyAccess(
+    earlyResult.data
+  );
+
+  renderFeedback(
+    feedbackResult.data
+  );
+
+  renderConfigurations(
+    configResult.data
+  );
+
+
+  status.className="status";
+
+  status.textContent=
+    "Dashboard updated successfully.";
+
+}
+
+
+/* ============================
+   EARLY ACCESS TABLE
+============================ */
+
+function renderEarlyAccess(rows){
+
+  const box =
+    document.getElementById("earlyTable");
+
+  if(!rows.length){
+
+    box.innerHTML=
+      '<div class="empty">No early-access requests yet.</div>';
+
+    return;
+  }
+
+  let html=`
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Interest</th>
+      </tr>
+    </thead>
+    <tbody>
+  `;
+
+  rows.forEach(row=>{
+
+    html+=`
+      <tr>
+        <td>${escapeHTML(row.id)}</td>
+        <td>${escapeHTML(row.name)}</td>
+        <td>${escapeHTML(row.email)}</td>
+        <td>${escapeHTML(row.interest)}</td>
+      </tr>
+    `;
+
+  });
+
+  html+=`
+    </tbody>
+  </table>
+  `;
+
+  box.innerHTML=html;
+
+}
+
+
+/* ============================
+   FEEDBACK TABLE
+============================ */
+
+function renderFeedback(rows){
+
+  const box =
+    document.getElementById("feedbackTable");
+
+  if(!rows.length){
+
+    box.innerHTML=
+      '<div class="empty">No feedback yet.</div>';
+
+    return;
+  }
+
+  let html=`
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Feature</th>
+        <th>Message</th>
+      </tr>
+    </thead>
+    <tbody>
+  `;
+
+  rows.forEach(row=>{
+
+    html+=`
+      <tr>
+        <td>${escapeHTML(row.id)}</td>
+        <td>${escapeHTML(row.name)}</td>
+        <td>${escapeHTML(row.email)}</td>
+        <td>${escapeHTML(row.feature)}</td>
+        <td>${escapeHTML(row.message)}</td>
+      </tr>
+    `;
+
+  });
+
+  html+=`
+    </tbody>
+  </table>
+  `;
+
+  box.innerHTML=html;
+
+}
+
+
+/* ============================
+   CONFIGURATION TABLE
+============================ */
+
+function renderConfigurations(rows){
+
+  const box =
+    document.getElementById("configTable");
+
+  if(!rows.length){
+
+    box.innerHTML=
+      '<div class="empty">No ZENG configurations yet.</div>';
+
+    return;
+  }
+
+  let html=`
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Bottle</th>
+        <th>Cap</th>
+        <th>LED</th>
+        <th>Display</th>
+        <th>Finish</th>
+      </tr>
+    </thead>
+    <tbody>
+  `;
+
+  rows.forEach(row=>{
+
+    html+=`
+      <tr>
+        <td>${escapeHTML(row.id)}</td>
+        <td>${escapeHTML(row.name)}</td>
+        <td>${escapeHTML(row.email)}</td>
+        <td>${escapeHTML(row.bottle_color)}</td>
+        <td>${escapeHTML(row.cap_color)}</td>
+        <td>${escapeHTML(row.led_color)}</td>
+        <td>${escapeHTML(row.display_style)}</td>
+        <td>${escapeHTML(row.finish)}</td>
+      </tr>
+    `;
+
+  });
+
+  html+=`
+    </tbody>
+  </table>
+  `;
+
+  box.innerHTML=html;
+
+}
+
+
+/* ============================
+   SECURITY
+============================ */
+
+function escapeHTML(value){
+
+  if(value === null || value === undefined){
+    return "";
+  }
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ============================
+   CHECK EXISTING SESSION
+============================ */
+
+async function checkSession(){
+
+  const {
+    data:{
+      session
+    }
+  } =
+  await supabaseClient.auth.getSession();
+
+  if(session){
+
+    showDashboard();
+
+  }
+
+}
+
+
+checkSession();
+
+</script>
+
+</body>
+</html>
