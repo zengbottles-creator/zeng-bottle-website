@@ -1,776 +1,894 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="ZENG — Smart hydration, redesigned.">
-<title>ZENG — Smart Hydration</title>
+
+<title>ZENG — Water. Smarter.</title>
+
+<meta name="description" content="ZENG Smart Bottle — smarter hydration with UV-C cleaning, temperature display and intelligent hydration technology.">
+<meta name="theme-color" content="#05070a">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
 
-:root{
-  --bg:#05070a;
-  --surface:#0c1015;
-  --surface2:#111720;
-  --text:#f5f7fa;
-  --muted:#9aa5b1;
-  --line:rgba(255,255,255,.09);
-  --accent:#7ee7ff;
-  --accent2:#66ffb0;
-  --radius:24px;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-html{scroll-behavior:smooth}
+html{
+scroll-behavior:smooth;
+}
 
 body{
-  font-family:Inter,Arial,Helvetica,sans-serif;
-  background:
-    radial-gradient(circle at 80% 10%,rgba(126,231,255,.10),transparent 28%),
-    radial-gradient(circle at 10% 50%,rgba(102,255,176,.06),transparent 25%),
-    var(--bg);
-  color:var(--text);
-  line-height:1.6;
-  overflow-x:hidden;
+font-family:Inter,Arial,Helvetica,sans-serif;
+background:#05070a;
+color:#f5f7fa;
+line-height:1.6;
+overflow-x:hidden;
 }
 
-a{color:inherit;text-decoration:none}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
+a{
+color:inherit;
+text-decoration:none;
+}
 
-.nav{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:1000;
-  background:rgba(5,7,10,.72);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
+button,
+input,
+select,
+textarea{
+font:inherit;
+}
+
+:root{
+--bg:#05070a;
+--card:#0b0f14;
+--card2:#10151c;
+--line:rgba(255,255,255,.10);
+--muted:#9ba5b1;
+--white:#ffffff;
+--green:#65ffb0;
+--blue:#6bb8ff;
+--violet:#b68cff;
+}
+
+.container{
+width:min(1180px,92%);
+margin:auto;
+}
+
+section{
+padding:100px 0;
+}
+
+.navbar{
+position:fixed;
+top:0;
+left:0;
+right:0;
+z-index:1000;
+background:rgba(5,7,10,.78);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .nav-inner{
-  max-width:1200px;
-  margin:auto;
-  height:76px;
-  padding:0 24px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+height:74px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
 .logo{
-  font-size:25px;
-  font-weight:900;
-  letter-spacing:4px;
+font-size:25px;
+font-weight:900;
+letter-spacing:5px;
 }
 
-.logo span{color:var(--accent)}
-
 .nav-links{
-  display:flex;
-  gap:30px;
-  align-items:center;
+display:flex;
+gap:30px;
+align-items:center;
 }
 
 .nav-links a{
-  color:#cbd2da;
-  font-size:14px;
-  transition:.25s;
+font-size:14px;
+color:#b9c1ca;
+transition:.25s;
 }
 
-.nav-links a:hover{color:white}
+.nav-links a:hover{
+color:#fff;
+}
 
 .nav-cta{
-  padding:11px 18px;
-  border-radius:999px;
-  background:white;
-  color:#05070a !important;
-  font-weight:800;
+padding:11px 17px;
+border:1px solid var(--line);
+border-radius:12px;
 }
 
-.menu{
-  display:none;
-  background:none;
-  border:0;
-  color:white;
-  font-size:25px;
+.menu-btn{
+display:none;
+background:none;
+border:0;
+color:#fff;
+font-size:25px;
+cursor:pointer;
 }
+
+/* HERO */
 
 .hero{
-  min-height:100vh;
-  padding:150px 24px 80px;
-  display:flex;
-  align-items:center;
+min-height:100vh;
+display:flex;
+align-items:center;
+padding-top:120px;
+position:relative;
+overflow:hidden;
 }
 
-.hero-inner{
-  max-width:1200px;
-  margin:auto;
-  width:100%;
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:50px;
-  align-items:center;
+.hero:before{
+content:"";
+position:absolute;
+width:650px;
+height:650px;
+border-radius:50%;
+background:radial-gradient(circle,rgba(101,255,176,.10),transparent 65%);
+top:-220px;
+right:-150px;
+pointer-events:none;
+}
+
+.hero-grid{
+display:grid;
+grid-template-columns:1.05fr .95fr;
+gap:70px;
+align-items:center;
 }
 
 .eyebrow{
-  display:inline-flex;
-  padding:8px 13px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.035);
-  border-radius:999px;
-  color:var(--accent);
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin-bottom:22px;
+display:inline-flex;
+align-items:center;
+gap:9px;
+font-size:12px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:var(--green);
+margin-bottom:20px;
+}
+
+.eyebrow:before{
+content:"";
+width:28px;
+height:1px;
+background:var(--green);
 }
 
 .hero h1{
-  font-size:clamp(58px,8vw,105px);
-  line-height:.9;
-  letter-spacing:-5px;
-  max-width:700px;
+font-size:clamp(55px,8vw,100px);
+line-height:.92;
+letter-spacing:-5px;
+max-width:800px;
+margin-bottom:28px;
 }
 
-.hero h1 span{color:var(--accent)}
+.hero h1 span{
+color:#8c97a4;
+}
 
 .hero p{
-  max-width:570px;
-  color:var(--muted);
-  font-size:18px;
-  margin:28px 0;
+font-size:19px;
+color:var(--muted);
+max-width:600px;
+margin-bottom:35px;
 }
 
-.actions{
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
+.hero-buttons{
+display:flex;
+gap:14px;
+flex-wrap:wrap;
 }
 
 .btn{
-  border:0;
-  border-radius:999px;
-  padding:14px 23px;
-  font-weight:800;
-  transition:.25s;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+border-radius:14px;
+padding:14px 21px;
+border:1px solid var(--line);
+cursor:pointer;
+transition:.25s;
+font-weight:700;
 }
 
 .btn-primary{
-  background:white;
-  color:#05070a;
+background:#fff;
+color:#05070a;
 }
 
 .btn-primary:hover{
-  transform:translateY(-2px);
-  box-shadow:0 12px 30px rgba(255,255,255,.12);
+transform:translateY(-2px);
+box-shadow:0 12px 35px rgba(255,255,255,.12);
 }
 
 .btn-secondary{
-  background:transparent;
-  color:white;
-  border:1px solid var(--line);
+background:rgba(255,255,255,.03);
+color:#fff;
 }
 
-.btn-secondary:hover{background:rgba(255,255,255,.05)}
-
-.hero-note{
-  margin-top:20px;
-  color:#697581;
-  font-size:12px;
+.btn-secondary:hover{
+background:rgba(255,255,255,.07);
 }
 
-.visual{
-  min-height:550px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-}
+/* BOTTLE */
 
-.glow{
-  position:absolute;
-  width:360px;
-  height:360px;
-  border-radius:50%;
-  background:var(--accent);
-  opacity:.08;
-  filter:blur(55px);
+.hero-product{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:520px;
 }
 
 .bottle{
-  position:relative;
-  width:205px;
-  height:450px;
-  border-radius:55px 55px 42px 42px;
-  background:
-    linear-gradient(100deg,rgba(255,255,255,.20),transparent 18%,transparent 72%,rgba(0,0,0,.35)),
-    linear-gradient(90deg,#242a31,#929aa2 48%,#353c44);
-  border:1px solid rgba(255,255,255,.25);
-  box-shadow:
-    0 40px 80px rgba(0,0,0,.55),
-    inset 8px 0 15px rgba(255,255,255,.08);
-  transform:perspective(900px) rotateY(-12deg);
-  transition:.5s;
+width:220px;
+height:440px;
+border-radius:45px 45px 38px 38px;
+position:relative;
+background:linear-gradient(120deg,#171c23,#69727d,#151a20);
+box-shadow:
+0 45px 80px rgba(0,0,0,.55),
+inset 10px 0 20px rgba(255,255,255,.06),
+inset -10px 0 25px rgba(0,0,0,.35);
+border:1px solid rgba(255,255,255,.16);
+transition:.5s;
 }
 
-.bottle:hover{
-  transform:perspective(900px) rotateY(-3deg) translateY(-8px);
+.bottle:before{
+content:"";
+position:absolute;
+width:118px;
+height:48px;
+left:50%;
+transform:translateX(-50%);
+top:-42px;
+border-radius:17px 17px 8px 8px;
+background:linear-gradient(120deg,#11151a,#7a838c,#171b20);
+border:1px solid rgba(255,255,255,.18);
 }
 
-.bottle-cap{
-  position:absolute;
-  top:-54px;
-  left:26px;
-  right:26px;
-  height:72px;
-  border-radius:27px 27px 12px 12px;
-  background:linear-gradient(90deg,#161b20,#59616a,#171c21);
-  border:1px solid rgba(255,255,255,.2);
+.bottle:after{
+content:"ZENG";
+position:absolute;
+left:50%;
+top:48%;
+transform:translate(-50%,-50%) rotate(-90deg);
+font-size:26px;
+font-weight:900;
+letter-spacing:7px;
+color:rgba(255,255,255,.65);
 }
 
-.cap-ring{
-  position:absolute;
-  top:55px;
-  left:19px;
-  right:19px;
-  height:13px;
-  border-radius:50%;
-  background:#171b20;
+.bottle-display{
+position:absolute;
+top:115px;
+left:50%;
+transform:translateX(-50%);
+width:92px;
+height:45px;
+border-radius:10px;
+background:#020407;
+border:1px solid rgba(255,255,255,.2);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:11px;
+color:var(--blue);
+letter-spacing:1px;
+box-shadow:0 0 20px rgba(107,184,255,.15);
 }
 
-.display{
-  position:absolute;
-  top:125px;
-  left:30px;
-  right:30px;
-  height:110px;
-  border-radius:20px;
-  background:#05080b;
-  border:1px solid rgba(255,255,255,.16);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  box-shadow:inset 0 0 25px rgba(126,231,255,.05);
+.led-ring{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+bottom:58px;
+width:135px;
+height:5px;
+border-radius:50%;
+background:var(--blue);
+box-shadow:0 0 18px currentColor;
+color:var(--blue);
 }
 
-.display-main{
-  font-size:27px;
-  font-weight:900;
-  color:var(--accent);
-}
-
-.display-sub{
-  font-size:10px;
-  color:#73808c;
-  letter-spacing:2px;
-  margin-top:5px;
-}
-
-.led{
-  position:absolute;
-  left:43px;
-  right:43px;
-  bottom:55px;
-  height:5px;
-  border-radius:10px;
-  background:var(--accent);
-  box-shadow:0 0 18px var(--accent);
-}
-
-.brand{
-  position:absolute;
-  bottom:135px;
-  left:0;
-  right:0;
-  text-align:center;
-  letter-spacing:5px;
-  font-size:13px;
-  font-weight:900;
-  color:rgba(255,255,255,.65);
-}
-
-section{padding:110px 24px}
-
-.container{
-  max-width:1200px;
-  margin:auto;
-}
+/* SECTIONS */
 
 .section-head{
-  max-width:700px;
-  margin-bottom:50px;
-}
-
-.section-head .small{
-  color:var(--accent);
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:2px;
-  font-size:12px;
+max-width:720px;
+margin-bottom:50px;
 }
 
 .section-head h2{
-  font-size:clamp(38px,5vw,65px);
-  line-height:1;
-  letter-spacing:-3px;
-  margin:12px 0 18px;
+font-size:clamp(36px,5vw,62px);
+letter-spacing:-2px;
+line-height:1;
+margin-bottom:17px;
 }
 
 .section-head p{
-  color:var(--muted);
-  font-size:17px;
+color:var(--muted);
+font-size:17px;
 }
 
-.stats{
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  padding:35px 0;
-}
-
-.stats-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.stat{text-align:center}
-
-.stat strong{
-  display:block;
-  font-size:36px;
-}
-
-.stat span{
-  color:var(--muted);
-  font-size:13px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
+.grid-3{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
 }
 
 .card{
-  padding:30px;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
-  transition:.3s;
+background:linear-gradient(145deg,#0b0f14,#080b0f);
+border:1px solid var(--line);
+border-radius:22px;
+padding:30px;
+transition:.3s;
 }
 
 .card:hover{
-  transform:translateY(-5px);
-  border-color:rgba(126,231,255,.25);
+transform:translateY(-5px);
+border-color:rgba(255,255,255,.18);
 }
 
-.icon{
-  width:48px;
-  height:48px;
-  border-radius:15px;
-  display:grid;
-  place-items:center;
-  background:rgba(126,231,255,.08);
-  color:var(--accent);
-  font-size:20px;
-  margin-bottom:25px;
+.card-number{
+font-size:12px;
+color:#69727e;
+margin-bottom:30px;
+letter-spacing:2px;
 }
 
 .card h3{
-  font-size:21px;
-  margin-bottom:10px;
+font-size:23px;
+margin-bottom:12px;
 }
 
 .card p{
-  color:var(--muted);
-  font-size:14px;
+color:var(--muted);
+font-size:15px;
 }
 
-.product-wrap{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:70px;
-  align-items:center;
+.feature-icon{
+font-size:28px;
+margin-bottom:20px;
 }
 
-.product-copy h2{
-  font-size:clamp(42px,5vw,70px);
-  line-height:.95;
-  letter-spacing:-3px;
-  margin-bottom:20px;
-}
+/* TECHNOLOGY */
 
-.product-copy p{
-  color:var(--muted);
-  margin-bottom:25px;
-}
-
-.product-list{
-  display:grid;
-  gap:13px;
-}
-
-.product-list div{
-  padding:14px 17px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:rgba(255,255,255,.025);
-}
-
-.product-list b{margin-right:8px}
-
-.builder{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:35px;
-  align-items:start;
-}
-
-.preview-card,.controls{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.035);
-  border-radius:28px;
-  padding:35px;
-}
-
-.preview-card{
-  min-height:650px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  position:sticky;
-  top:100px;
-}
-
-.preview-title{
-  position:absolute;
-  top:25px;
-  left:30px;
-  color:var(--muted);
-  font-size:12px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.preview-bottle{
-  position:relative;
-  width:170px;
-  height:380px;
-  border-radius:45px 45px 35px 35px;
-  background:linear-gradient(90deg,#20252b,#858d95,#252b31);
-  box-shadow:0 35px 65px rgba(0,0,0,.5);
-  transition:.4s;
-}
-
-.preview-bottle .bcap{
-  position:absolute;
-  top:-45px;
-  left:22px;
-  right:22px;
-  height:60px;
-  border-radius:23px 23px 10px 10px;
-  background:#161b20;
-  border:1px solid rgba(255,255,255,.2);
-}
-
-.preview-bottle .bdisplay{
-  position:absolute;
-  top:100px;
-  left:25px;
-  right:25px;
-  height:90px;
-  border-radius:16px;
-  background:#030507;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-}
-
-.preview-bottle .bmain{
-  color:var(--accent);
-  font-size:22px;
-  font-weight:900;
-}
-
-.preview-bottle .bsub{
-  color:#68737e;
-  font-size:8px;
-  letter-spacing:1px;
-}
-
-.preview-bottle .bled{
-  position:absolute;
-  bottom:45px;
-  left:36px;
-  right:36px;
-  height:5px;
-  border-radius:20px;
-  background:var(--accent);
-  box-shadow:0 0 17px var(--accent);
-}
-
-.preview-bottle .bbrand{
-  position:absolute;
-  bottom:115px;
-  left:0;
-  right:0;
-  text-align:center;
-  letter-spacing:4px;
-  font-size:11px;
-  font-weight:900;
-  color:rgba(255,255,255,.6);
-}
-
-.preview-info{
-  text-align:center;
-  margin-top:30px;
-}
-
-.preview-info h3{font-size:20px}
-
-.preview-info p{
-  color:var(--muted);
-  font-size:13px;
-}
-
-.control-group{margin-bottom:30px}
-
-.control-group h3{
-  font-size:14px;
-  margin-bottom:12px;
-}
-
-.options{
-  display:flex;
-  flex-wrap:wrap;
-  gap:9px;
-}
-
-.option{
-  border:1px solid var(--line);
-  background:#0b0f14;
-  color:#b8c0c8;
-  border-radius:12px;
-  padding:11px 14px;
-  transition:.2s;
-}
-
-.option:hover{border-color:rgba(126,231,255,.35)}
-
-.option.active{
-  color:white;
-  border-color:var(--accent);
-  background:rgba(126,231,255,.08);
-}
-
-.color-option{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.dot{
-  width:16px;
-  height:16px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.35);
-}
-
-.summary{
-  padding:20px;
-  border-radius:18px;
-  background:#080c11;
-  border:1px solid var(--line);
-}
-
-.summary p{
-  color:var(--muted);
-  font-size:13px;
-  margin:5px 0;
-}
-
-.summary strong{color:white}
-
-.tech{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
+.tech-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
 }
 
 .tech-card{
-  padding:35px;
-  border:1px solid var(--line);
-  border-radius:24px;
-  background:linear-gradient(145deg,rgba(126,231,255,.06),rgba(255,255,255,.015));
+padding:38px;
+border:1px solid var(--line);
+border-radius:25px;
+background:#090d12;
 }
 
 .tech-card h3{
-  font-size:25px;
-  margin-bottom:12px;
+font-size:28px;
+margin-bottom:15px;
 }
 
-.tech-card p{color:var(--muted)}
-
-.form-box{
-  max-width:750px;
-  margin:auto;
-  padding:40px;
-  border:1px solid var(--line);
-  border-radius:28px;
-  background:rgba(255,255,255,.035);
+.tech-card p{
+color:var(--muted);
 }
 
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
+.tech-tag{
+display:inline-block;
+margin-top:25px;
+padding:8px 12px;
+border-radius:30px;
+background:rgba(101,255,176,.08);
+border:1px solid rgba(101,255,176,.16);
+color:var(--green);
+font-size:12px;
+}
+
+/* CONFIGURATOR */
+
+.configurator{
+background:#080b0f;
+border-top:1px solid var(--line);
+border-bottom:1px solid var(--line);
+}
+
+.config-grid{
+display:grid;
+grid-template-columns:.9fr 1.1fr;
+gap:25px;
+align-items:start;
+}
+
+.config-preview{
+position:sticky;
+top:105px;
+min-height:650px;
+border:1px solid var(--line);
+border-radius:26px;
+background:
+radial-gradient(circle at center,rgba(101,255,176,.07),transparent 45%),
+#06090d;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
+
+.preview-bottle{
+width:190px;
+height:390px;
+border-radius:42px 42px 35px 35px;
+position:relative;
+border:1px solid rgba(255,255,255,.15);
+box-shadow:0 45px 80px rgba(0,0,0,.55);
+transition:.4s;
+}
+
+.preview-bottle:before{
+content:"";
+position:absolute;
+width:105px;
+height:44px;
+left:50%;
+transform:translateX(-50%);
+top:-38px;
+border-radius:15px 15px 8px 8px;
+background:#15191f;
+border:1px solid rgba(255,255,255,.18);
+}
+
+.preview-logo{
+position:absolute;
+top:47%;
+left:50%;
+transform:translate(-50%,-50%) rotate(-90deg);
+font-size:24px;
+font-weight:900;
+letter-spacing:6px;
+color:rgba(255,255,255,.62);
+}
+
+.preview-screen{
+position:absolute;
+top:95px;
+left:50%;
+transform:translateX(-50%);
+width:80px;
+height:40px;
+border-radius:9px;
+background:#020407;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:9px;
+letter-spacing:1px;
+}
+
+.preview-led{
+position:absolute;
+left:50%;
+bottom:50px;
+transform:translateX(-50%);
+width:118px;
+height:5px;
+border-radius:50%;
+}
+
+.config-panel{
+border:1px solid var(--line);
+border-radius:26px;
+background:#090d12;
+padding:30px;
+}
+
+.config-panel h3{
+font-size:28px;
+margin-bottom:7px;
+}
+
+.config-subtitle{
+color:var(--muted);
+margin-bottom:28px;
+font-size:14px;
+}
+
+.option-group{
+margin-bottom:27px;
+}
+
+.option-title{
+font-size:13px;
+font-weight:800;
+margin-bottom:12px;
+color:#dce2e8;
+text-transform:uppercase;
+letter-spacing:1px;
+}
+
+.options{
+display:flex;
+flex-wrap:wrap;
+gap:9px;
+}
+
+.option{
+padding:11px 14px;
+border:1px solid var(--line);
+border-radius:12px;
+background:#0c1117;
+color:#aeb6c0;
+cursor:pointer;
+transition:.2s;
+font-size:13px;
+}
+
+.option:hover{
+border-color:rgba(255,255,255,.3);
+color:#fff;
+}
+
+.option.active{
+border-color:#fff;
+background:#fff;
+color:#05070a;
+}
+
+.config-contact{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:28px;
 }
 
 .field{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-  margin-bottom:15px;
+margin-bottom:15px;
 }
-
-.field.full{grid-column:1/-1}
 
 .field label{
-  font-size:12px;
-  color:#aeb7c0;
+display:block;
+font-size:12px;
+font-weight:700;
+color:#cbd2da;
+margin-bottom:8px;
 }
 
-.field input,.field textarea,.field select{
-  width:100%;
-  background:#080c11;
-  color:white;
-  border:1px solid var(--line);
-  outline:none;
-  border-radius:13px;
-  padding:13px 14px;
+.field input,
+.field textarea,
+.field select{
+width:100%;
+padding:13px 14px;
+border-radius:13px;
+border:1px solid var(--line);
+background:#06090d;
+color:#fff;
+outline:none;
+transition:.2s;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+border-color:rgba(255,255,255,.45);
 }
 
 .field textarea{
-  min-height:120px;
-  resize:vertical;
+min-height:120px;
+resize:vertical;
+}
+
+.summary{
+margin-top:25px;
+padding:20px;
+border-radius:17px;
+background:#06090d;
+border:1px solid var(--line);
+}
+
+.summary-row{
+display:flex;
+justify-content:space-between;
+gap:20px;
+padding:8px 0;
+font-size:13px;
+border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.summary-row:last-child{
+border-bottom:0;
+}
+
+.summary-row span:first-child{
+color:#747f8b;
+}
+
+.summary-row span:last-child{
+font-weight:700;
+}
+
+.config-message{
+margin-top:14px;
+display:none;
+padding:12px 14px;
+border-radius:12px;
+background:rgba(101,255,176,.08);
+border:1px solid rgba(101,255,176,.18);
+color:var(--green);
+font-size:13px;
+}
+
+.config-message.error{
+background:rgba(255,80,80,.08);
+border-color:rgba(255,80,80,.18);
+color:#ff9b9b;
+}
+
+/* FORMS */
+
+.form-section{
+display:grid;
+grid-template-columns:.8fr 1.2fr;
+gap:50px;
+align-items:start;
+}
+
+.form-card{
+background:#090d12;
+border:1px solid var(--line);
+border-radius:25px;
+padding:32px;
+}
+
+.form-card h3{
+font-size:28px;
+margin-bottom:8px;
+}
+
+.form-card>p{
+color:var(--muted);
+font-size:14px;
+margin-bottom:25px;
 }
 
 .form-message{
-  margin-top:15px;
-  color:var(--accent2);
-  font-size:13px;
-  display:none;
+display:none;
+margin-top:12px;
+padding:12px;
+border-radius:12px;
+font-size:13px;
+background:rgba(101,255,176,.08);
+color:var(--green);
+border:1px solid rgba(101,255,176,.15);
 }
 
-.form-message.error{color:#ff8d8d}
+.form-message.error{
+background:rgba(255,70,70,.08);
+color:#ff9b9b;
+border-color:rgba(255,70,70,.15);
+}
+
+/* FOOTER */
 
 footer{
-  border-top:1px solid var(--line);
-  padding:45px 24px;
+padding:55px 0;
+border-top:1px solid var(--line);
 }
 
 .footer-inner{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  color:#697581;
-  font-size:13px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:30px;
 }
 
-.reveal{
-  opacity:0;
-  transform:translateY(25px);
-  transition:.7s ease;
+.footer-logo{
+font-size:24px;
+font-weight:900;
+letter-spacing:5px;
 }
 
-.reveal.show{
-  opacity:1;
-  transform:none;
+.footer-text{
+color:#69727e;
+font-size:13px;
 }
 
-@media(max-width:850px){
+/* MOBILE */
+
+@media(max-width:900px){
 
 .nav-links{
-  display:none;
-  position:absolute;
-  top:76px;
-  left:0;
-  right:0;
-  padding:20px;
-  background:#080b10;
-  border-bottom:1px solid var(--line);
-  flex-direction:column;
+position:absolute;
+top:74px;
+left:0;
+right:0;
+background:#080b0f;
+border-bottom:1px solid var(--line);
+display:none;
+flex-direction:column;
+padding:25px;
 }
 
-.nav-links.open{display:flex}
-.menu{display:block}
-
-.hero-inner,.product-wrap,.builder,.tech{
-  grid-template-columns:1fr;
+.nav-links.show{
+display:flex;
 }
 
-.hero{padding-top:125px}
-
-.hero h1{letter-spacing:-3px}
-
-.visual{min-height:480px}
-
-.preview-card{
-  position:relative;
-  top:auto;
+.menu-btn{
+display:block;
 }
 
-.grid{grid-template-columns:1fr}
-
-.stats-grid{
-  grid-template-columns:1fr;
-  gap:30px;
+.hero-grid,
+.config-grid,
+.form-section,
+.tech-grid{
+grid-template-columns:1fr;
 }
 
-.form-grid{grid-template-columns:1fr}
-.field.full{grid-column:auto}
-
-.footer-inner{flex-direction:column}
+.hero{
+padding-top:130px;
 }
+
+.hero-product{
+min-height:430px;
+}
+
+.config-preview{
+position:relative;
+top:auto;
+min-height:520px;
+}
+
+.grid-3{
+grid-template-columns:1fr;
+}
+
+.config-contact{
+grid-template-columns:1fr;
+}
+
+section{
+padding:75px 0;
+}
+
+}
+
+@media(max-width:520px){
+
+.container{
+width:90%;
+}
+
+.hero h1{
+font-size:54px;
+letter-spacing:-3px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+.hero-product{
+min-height:390px;
+}
+
+.bottle{
+transform:scale(.82);
+}
+
+.preview-bottle{
+transform:scale(.82);
+}
+
+.config-panel,
+.form-card,
+.tech-card,
+.card{
+padding:22px;
+}
+
+.footer-inner{
+flex-direction:column;
+align-items:flex-start;
+}
+
+}
+
+/* COLORS */
+
+.body-graphite{
+background:linear-gradient(120deg,#0b0e12,#404852,#0a0d11);
+}
+
+.body-silver{
+background:linear-gradient(120deg,#727b84,#e4e8eb,#69727a);
+}
+
+.body-ocean{
+background:linear-gradient(120deg,#082a42,#0b7ca5,#061e32);
+}
+
+.cap-black:before{
+background:linear-gradient(120deg,#090b0e,#343b44,#080a0d);
+}
+
+.cap-silver:before{
+background:linear-gradient(120deg,#707982,#e4e8eb,#68717a);
+}
+
+.cap-white:before{
+background:linear-gradient(120deg,#c9cdd1,#ffffff,#b7bdc3);
+}
+
+.led-blue{
+background:#6bb8ff;
+box-shadow:0 0 20px #6bb8ff;
+}
+
+.led-green{
+background:#65ffb0;
+box-shadow:0 0 20px #65ffb0;
+}
+
+.led-violet{
+background:#b68cff;
+box-shadow:0 0 20px #b68cff;
+}
+
 </style>
 </head>
 
 <body>
 
-<nav class="nav">
-<div class="nav-inner">
+<!-- NAVBAR -->
 
-<a href="#home" class="logo">ZEN<span>G</span></a>
+<header class="navbar">
 
-<div class="nav-links" id="navLinks">
+<div class="container nav-inner">
+
+<a href="#home" class="logo">ZENG</a>
+
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+<nav class="nav-links" id="navLinks">
+
 <a href="#product">Product</a>
+<a href="#features">Features</a>
 <a href="#technology">Technology</a>
 <a href="#build">Build Your ZENG</a>
 <a href="#feedback">Feedback</a>
-<a href="#early" class="nav-cta">Early Access</a>
-</div>
 
-<button class="menu" onclick="toggleMenu()">☰</button>
+<a href="#early-access" class="nav-cta">Early Access</a>
 
-</div>
 </nav>
 
-<section class="hero" id="home">
-<div class="hero-inner">
-
-<div class="reveal">
-
-<div class="eyebrow">
-The next generation of hydration
 </div>
+
+</header>
+
+
+<!-- HERO -->
+
+<main>
+
+<section class="hero" id="home">
+
+<div class="container hero-grid">
+
+<div>
+
+<div class="eyebrow">Smart Hydration</div>
 
 <h1>
 Water.<br>
@@ -778,738 +896,678 @@ Water.<br>
 </h1>
 
 <p>
-Meet ZENG — a smart hydration bottle concept designed to
-bring intelligent technology, cleaner routines and a better
-drinking experience into everyday life.
+ZENG is a next-generation smart water bottle designed to make everyday hydration smarter, cleaner and more connected.
 </p>
 
-<div class="actions">
+<div class="hero-buttons">
+
 <a href="#build" class="btn btn-primary">
 Build Your ZENG →
 </a>
 
-<a href="#product" class="btn btn-secondary">
-Explore Product
+<a href="#technology" class="btn btn-secondary">
+Explore Technology
 </a>
-</div>
 
-<div class="hero-note">
-ZENG is currently under development.
 </div>
 
 </div>
 
-<div class="visual reveal">
 
-<div class="glow"></div>
+<div class="hero-product">
 
 <div class="bottle">
 
-<div class="bottle-cap"></div>
-<div class="cap-ring"></div>
-
-<div class="display">
-<div class="display-main">24°C</div>
-<div class="display-sub">STAY HYDRATED</div>
-</div>
-
-<div class="brand">ZENG</div>
-
-<div class="led"></div>
-
-</div>
-</div>
-
-</div>
-</section>
-
-<section style="padding-top:0;padding-bottom:80px;">
-
-<div class="container stats reveal">
-
-<div class="stats-grid">
-
-<div class="stat">
-<strong>01</strong>
-<span>Smart Bottle Concept</span>
-</div>
-
-<div class="stat">
-<strong>UV-C</strong>
-<span>Self-cleaning technology concept</span>
-</div>
-
-<div class="stat">
-<strong>∞</strong>
-<span>Designed around you</span>
-</div>
-
-</div>
-</div>
-</section>
-
-<section id="product">
-
-<div class="container product-wrap">
-
-<div class="product-copy reveal">
-
-<div class="section-head">
-
-<div class="small">
-The product
-</div>
-
-<h2>
-More than a bottle.
-</h2>
-
-<p>
-ZENG combines thoughtful hardware and smart interaction
-into one modern hydration experience.
-</p>
-
-</div>
-
-<div class="product-list">
-
-<div>
-<b>01</b> UV-C cleaning technology concept
-</div>
-
-<div>
-<b>02</b> Digital temperature display
-</div>
-
-<div>
-<b>03</b> Intelligent LED indicator
-</div>
-
-<div>
-<b>04</b> Smart hydration reminders
-</div>
-
-<div>
-<b>05</b> Personalised bottle experience
-</div>
-
-</div>
-
-</div>
-
-<div class="visual reveal">
-
-<div class="glow"></div>
-
-<div class="bottle">
-
-<div class="bottle-cap"></div>
-<div class="cap-ring"></div>
-
-<div class="display">
-
-<div class="display-main">
+<div class="bottle-display">
 24°C
 </div>
 
-<div class="display-sub">
-ZENG SMART
+<div class="led-ring"></div>
+
+</div>
+
 </div>
 
 </div>
 
-<div class="brand">
-ZENG
-</div>
-
-<div class="led"></div>
-
-</div>
-</div>
-
-</div>
 </section>
 
-<section>
+
+<!-- PRODUCT -->
+
+<section id="product">
 
 <div class="container">
 
-<div class="section-head reveal">
+<div class="section-head">
 
-<div class="small">
-Designed intelligently
-</div>
+<div class="eyebrow">The Product</div>
 
-<h2>
-Technology that feels simple.
-</h2>
+<h2>One bottle.<br>More intelligence.</h2>
 
 <p>
-Powerful ideas, presented through a clean and intuitive
-everyday experience.
+Designed around the way people actually drink water — combining smart electronics, visual feedback and a modern everyday form.
 </p>
 
 </div>
 
-<div class="grid">
 
-<div class="card reveal">
-<div class="icon">✦</div>
+<div class="grid-3">
 
-<h3>
-UV-C Cleaning
-</h3>
+<div class="card">
+
+<div class="card-number">01</div>
+
+<h3>Smart Display</h3>
 
 <p>
-A UV-C based cleaning system is being developed
-to support a cleaner bottle routine.
+See useful information directly on the bottle through an integrated digital display.
 </p>
 
 </div>
 
-<div class="card reveal">
-<div class="icon">°</div>
 
-<h3>
-Temperature Display
-</h3>
+<div class="card">
+
+<div class="card-number">02</div>
+
+<h3>UV-C Concept</h3>
 
 <p>
-See the bottle's temperature directly through
-the integrated digital display concept.
+A UV-C based self-cleaning system is being explored to help improve bottle hygiene.
 </p>
 
 </div>
 
-<div class="card reveal">
-<div class="icon">◉</div>
 
-<h3>
-Smart LED
-</h3>
+<div class="card">
 
-<p>
-A visual LED system can communicate bottle status
-and create a personalised experience.
-</p>
+<div class="card-number">03</div>
 
-</div>
-
-<div class="card reveal">
-<div class="icon">⌁</div>
-
-<h3>
-Hydration Reminders
-</h3>
+<h3>Hydration Intelligence</h3>
 
 <p>
-Future versions can help users build more consistent
-hydration habits.
-</p>
-
-</div>
-
-<div class="card reveal">
-<div class="icon">⌁</div>
-
-<h3>
-Smart Sensors
-</h3>
-
-<p>
-Sensor-based features are part of the product's
-ongoing development roadmap.
-</p>
-
-</div>
-
-<div class="card reveal">
-<div class="icon">✚</div>
-
-<h3>
-Personalisation
-</h3>
-
-<p>
-Choose colours, finishes, lighting and display
-preferences to make your ZENG yours.
+Future versions can combine sensors and intelligent feedback to make hydration more personalized.
 </p>
 
 </div>
 
 </div>
+
 </div>
+
 </section>
+
+
+<!-- FEATURES -->
+
+<section id="features">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">Features</div>
+
+<h2>Built for everyday life.</h2>
+
+<p>
+Simple interactions. Useful information. A product designed to fit naturally into your daily routine.
+</p>
+
+</div>
+
+
+<div class="grid-3">
+
+<div class="card">
+
+<div class="feature-icon">💧</div>
+
+<h3>Hydration Tracking</h3>
+
+<p>
+Designed to support smarter hydration habits through future intelligent tracking features.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="feature-icon">☀️</div>
+
+<h3>UV-C Cleaning</h3>
+
+<p>
+The ZENG concept includes UV-C technology for automated bottle-cleaning cycles.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="feature-icon">🌡️</div>
+
+<h3>Temperature</h3>
+
+<p>
+Check the temperature of your water directly through the integrated display.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="feature-icon">💡</div>
+
+<h3>LED Indicator</h3>
+
+<p>
+A visual LED system communicates selected bottle states and information.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="feature-icon">⚡</div>
+
+<h3>Smart Electronics</h3>
+
+<p>
+Electronics are designed around a compact and practical bottle architecture.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="feature-icon">🎨</div>
+
+<h3>Your Style</h3>
+
+<p>
+Customize the appearance of your ZENG through the Build Your ZENG experience.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TECHNOLOGY -->
 
 <section id="technology">
 
 <div class="container">
 
-<div class="section-head reveal">
+<div class="section-head">
 
-<div class="small">
-Inside ZENG
-</div>
+<div class="eyebrow">Technology</div>
 
-<h2>
-Built for a smarter routine.
-</h2>
+<h2>Technology inside.<br>Experience outside.</h2>
 
 <p>
-The ZENG platform is being developed around hardware,
-software and personalisation.
+ZENG is being developed around a combination of smart hardware, sensors, visual feedback and connected product experiences.
 </p>
 
 </div>
 
-<div class="tech">
 
-<div class="tech-card reveal">
+<div class="tech-grid">
 
-<h3>
-UV-C System
-</h3>
+<div class="tech-card">
 
-<p>
-Dedicated UV-C hardware is being explored for
-automated bottle-cleaning cycles. Final technical
-specifications and performance will be validated
-during product testing.
-</p>
-
-</div>
-
-<div class="tech-card reveal">
-
-<h3>
-Smart Display
-</h3>
+<h3>UV-C System</h3>
 
 <p>
-A compact digital interface can provide useful
-information such as temperature and bottle status.
+The concept uses UV-C LED technology as part of an automated cleaning system. Final performance, cycle time and safety specifications will be validated during engineering and testing.
 </p>
+
+<div class="tech-tag">
+IN DEVELOPMENT
+</div>
 
 </div>
 
-<div class="tech-card reveal">
 
-<h3>
-Intelligent Indicators
-</h3>
+<div class="tech-card">
+
+<h3>Smart Display</h3>
 
 <p>
-LED feedback creates a simple visual language
-without requiring the user to constantly open an app.
+A compact display can provide information such as water temperature and selected smart-bottle status.
 </p>
+
+<div class="tech-tag">
+SMART INTERFACE
+</div>
 
 </div>
 
-<div class="tech-card reveal">
 
-<h3>
-Future Connectivity
-</h3>
+<div class="tech-card">
+
+<h3>Sensor Platform</h3>
 
 <p>
-Future versions may connect ZENG with a companion
-digital experience for deeper personalisation.
+Future versions may use sensor data to provide more personalized hydration insights and feedback.
 </p>
 
+<div class="tech-tag">
+FUTURE READY
 </div>
 
 </div>
+
+
+<div class="tech-card">
+
+<h3>Intelligent Feedback</h3>
+
+<p>
+LED indicators and digital feedback are designed to make important information visible without making the product complicated.
+</p>
+
+<div class="tech-tag">
+USER FIRST
 </div>
+
+</div>
+
+</div>
+
+</div>
+
 </section>
 
-<section id="build">
+
+<!-- BUILD YOUR ZENG -->
+
+<section class="configurator" id="build">
 
 <div class="container">
 
-<div class="section-head reveal">
+<div class="section-head">
 
-<div class="small">
-ZENG Studio
-</div>
+<div class="eyebrow">Build Your ZENG</div>
 
-<h2>
-Build your ZENG.
-</h2>
+<h2>Make it yours.</h2>
 
 <p>
-Choose your colours, lighting and display style.
-See your configuration update instantly.
+Choose your bottle body, cap, LED, display and finish. Your configuration updates instantly.
 </p>
 
 </div>
 
-<div class="builder">
 
-<div class="preview-card reveal">
+<div class="config-grid">
 
-<div class="preview-title">
-Live Preview
-</div>
 
-<div class="preview-bottle" id="previewBottle">
+<!-- PREVIEW -->
 
-<div class="bcap" id="previewCap"></div>
+<div class="config-preview">
 
-<div class="bdisplay">
+<div class="preview-bottle body-graphite" id="previewBottle">
 
-<div class="bmain" id="previewDisplay">
+<div class="preview-screen" id="previewScreen">
 24°C
 </div>
 
-<div class="bsub" id="previewDisplaySub">
-ZENG SMART
-</div>
-
-</div>
-
-<div class="bbrand">
+<div class="preview-logo">
 ZENG
 </div>
 
-<div class="bled" id="previewLed"></div>
+<div class="preview-led led-blue" id="previewLed"></div>
 
 </div>
 
-<div class="preview-info">
+</div>
 
-<h3>
-Your ZENG
-</h3>
 
-<p id="previewText">
-Graphite · Black Cap · Ice Blue LED
+<!-- PANEL -->
+
+<div class="config-panel">
+
+<h3>Customize your bottle</h3>
+
+<p class="config-subtitle">
+Select the options you like and save your configuration.
 </p>
 
+
+<!-- BODY -->
+
+<div class="option-group">
+
+<div class="option-title">
+Bottle Colour
 </div>
-
-</div>
-
-<div class="controls reveal">
-
-<div class="control-group">
-
-<h3>
-01 — Bottle Colour
-</h3>
 
 <div class="options">
 
-<button
-class="option color-option active"
-onclick="setBody('graphite',this)">
-
-<span
-class="dot"
-style="background:#383e44">
-</span>
-
+<button class="option active"
+type="button"
+data-group="body"
+data-value="Graphite"
+onclick="selectOption(this)">
 Graphite
-
 </button>
 
-<button
-class="option color-option"
-onclick="setBody('silver',this)">
-
-<span
-class="dot"
-style="background:#c1c6ca">
-</span>
-
+<button class="option"
+type="button"
+data-group="body"
+data-value="Silver"
+onclick="selectOption(this)">
 Silver
-
 </button>
 
-<button
-class="option color-option"
-onclick="setBody('ocean',this)">
-
-<span
-class="dot"
-style="background:#183e52">
-</span>
-
+<button class="option"
+type="button"
+data-group="body"
+data-value="Ocean"
+onclick="selectOption(this)">
 Ocean
-
 </button>
 
 </div>
+
 </div>
 
-<div class="control-group">
 
-<h3>
-02 — Cap Colour
-</h3>
+<!-- CAP -->
+
+<div class="option-group">
+
+<div class="option-title">
+Cap Colour
+</div>
 
 <div class="options">
 
-<button
-class="option active"
-onclick="setCap('black',this)">
+<button class="option active"
+type="button"
+data-group="cap"
+data-value="Black"
+onclick="selectOption(this)">
 Black
 </button>
 
-<button
-class="option"
-onclick="setCap('silver',this)">
+<button class="option"
+type="button"
+data-group="cap"
+data-value="Silver"
+onclick="selectOption(this)">
 Silver
 </button>
 
-<button
-class="option"
-onclick="setCap('white',this)">
+<button class="option"
+type="button"
+data-group="cap"
+data-value="White"
+onclick="selectOption(this)">
 White
 </button>
 
 </div>
+
 </div>
 
-<div class="control-group">
 
-<h3>
-03 — LED Colour
-</h3>
+<!-- LED -->
+
+<div class="option-group">
+
+<div class="option-title">
+LED Colour
+</div>
 
 <div class="options">
 
-<button
-class="option active"
-onclick="setLed('#7ee7ff','Ice Blue',this)">
+<button class="option active"
+type="button"
+data-group="led"
+data-value="Ice Blue"
+onclick="selectOption(this)">
 Ice Blue
 </button>
 
-<button
-class="option"
-onclick="setLed('#66ffb0','Fresh Green',this)">
+<button class="option"
+type="button"
+data-group="led"
+data-value="Fresh Green"
+onclick="selectOption(this)">
 Fresh Green
 </button>
 
-<button
-class="option"
-onclick="setLed('#b98cff','Violet',this)">
+<button class="option"
+type="button"
+data-group="led"
+data-value="Violet"
+onclick="selectOption(this)">
 Violet
 </button>
 
 </div>
+
 </div>
 
-<div class="control-group">
 
-<h3>
-04 — Display Style
-</h3>
+<!-- DISPLAY -->
+
+<div class="option-group">
+
+<div class="option-title">
+Display Style
+</div>
 
 <div class="options">
 
-<button
-class="option active"
-onclick="setDisplay('24°C','Temperature',this)">
+<button class="option active"
+type="button"
+data-group="display"
+data-value="Temperature"
+onclick="selectOption(this)">
 Temperature
 </button>
 
-<button
-class="option"
-onclick="setDisplay('98%','Hydration',this)">
+<button class="option"
+type="button"
+data-group="display"
+data-value="Hydration"
+onclick="selectOption(this)">
 Hydration
 </button>
 
-<button
-class="option"
-onclick="setDisplay('ZENG','Minimal',this)">
+<button class="option"
+type="button"
+data-group="display"
+data-value="Minimal"
+onclick="selectOption(this)">
 Minimal
 </button>
 
 </div>
+
 </div>
 
-<div class="control-group">
 
-<h3>
-05 — Finish
-</h3>
+<!-- FINISH -->
+
+<div class="option-group">
+
+<div class="option-title">
+Finish
+</div>
 
 <div class="options">
 
-<button
-class="option active"
-onclick="setFinish('matte',this)">
+<button class="option active"
+type="button"
+data-group="finish"
+data-value="Matte"
+onclick="selectOption(this)">
 Matte
 </button>
 
-<button
-class="option"
-onclick="setFinish('metal',this)">
+<button class="option"
+type="button"
+data-group="finish"
+data-value="Metallic"
+onclick="selectOption(this)">
 Metallic
 </button>
 
-<button
-class="option"
-onclick="setFinish('soft',this)">
+<button class="option"
+type="button"
+data-group="finish"
+data-value="Soft Touch"
+onclick="selectOption(this)">
 Soft Touch
 </button>
 
 </div>
+
 </div>
+
+
+<!-- CONTACT -->
+
+<div class="config-contact">
+
+<div class="field">
+
+<label for="configName">
+Your Name
+</label>
+
+<input
+id="configName"
+type="text"
+placeholder="Enter your name"
+autocomplete="name"
+>
+
+</div>
+
+
+<div class="field">
+
+<label for="configEmail">
+Your Email
+</label>
+
+<input
+id="configEmail"
+type="email"
+placeholder="you@example.com"
+autocomplete="email"
+>
+
+</div>
+
+</div>
+
+
+<!-- SUMMARY -->
 
 <div class="summary">
 
-<p>
-Bottle:
-<strong id="sumBody">Graphite</strong>
-</p>
+<div class="summary-row">
+<span>Bottle</span>
+<span id="summaryBody">Graphite</span>
+</div>
 
-<p>
-Cap:
-<strong id="sumCap">Black</strong>
-</p>
+<div class="summary-row">
+<span>Cap</span>
+<span id="summaryCap">Black</span>
+</div>
 
-<p>
-LED:
-<strong id="sumLed">Ice Blue</strong>
-</p>
+<div class="summary-row">
+<span>LED</span>
+<span id="summaryLed">Ice Blue</span>
+</div>
 
-<p>
-Display:
-<strong id="sumDisplay">Temperature</strong>
-</p>
+<div class="summary-row">
+<span>Display</span>
+<span id="summaryDisplay">Temperature</span>
+</div>
 
-<p>
-Finish:
-<strong id="sumFinish">Matte</strong>
-</p>
+<div class="summary-row">
+<span>Finish</span>
+<span id="summaryFinish">Matte</span>
+</div>
 
 </div>
 
-<br>
 
 <button
 class="btn btn-primary"
 type="button"
+style="width:100%;margin-top:18px"
 onclick="saveConfiguration()">
 
 Save My Configuration →
 
 </button>
 
+
 <div
-class="form-message"
-id="configMessage">
+id="configMessage"
+class="config-message">
 </div>
 
 </div>
 
 </div>
+
 </div>
+
 </section>
 
-<section>
 
-<div class="container">
-
-<div class="section-head reveal">
-
-<div class="small">
-The experience
-</div>
-
-<h2>
-Designed around your day.
-</h2>
-
-</div>
-
-<div class="grid">
-
-<div class="card reveal">
-
-<div class="icon">
-01
-</div>
-
-<h3>
-Fill
-</h3>
-
-<p>
-Fill your ZENG with your preferred drinking water
-and start your day.
-</p>
-
-</div>
-
-<div class="card reveal">
-
-<div class="icon">
-02
-</div>
-
-<h3>
-Clean
-</h3>
-
-<p>
-Activate the cleaning cycle when needed.
-Final product specifications are subject to testing.
-</p>
-
-</div>
-
-<div class="card reveal">
-
-<div class="icon">
-03
-</div>
-
-<h3>
-Drink
-</h3>
-
-<p>
-Keep hydration simple with smart information
-and visual feedback.
-</p>
-
-</div>
-
-</div>
-</div>
-</section>
+<!-- FEEDBACK -->
 
 <section id="feedback">
 
 <div class="container">
 
-<div class="section-head reveal">
+<div class="form-section">
 
-<div class="small">
-Help shape ZENG
-</div>
+<div class="section-head">
 
-<h2>
-Tell us what you want.
-</h2>
+<div class="eyebrow">Your Opinion</div>
+
+<h2>Help shape ZENG.</h2>
 
 <p>
-Your feedback can help shape future versions of ZENG.
+Tell us what matters most to you in a smart water bottle. Your feedback helps us decide what to build next.
 </p>
 
 </div>
 
-<div class="form-box reveal">
 
-<form id="feedbackForm">
+<div class="form-card">
 
-<div class="form-grid">
+<h3>Share your feedback</h3>
+
+<p>
+A few seconds from you can help improve the product.
+</p>
+
 
 <div class="field">
 
-<label>
+<label for="feedbackName">
 Name
 </label>
 
@@ -1517,13 +1575,14 @@ Name
 id="feedbackName"
 type="text"
 placeholder="Your name"
-required>
+>
 
 </div>
 
+
 <div class="field">
 
-<label>
+<label for="feedbackEmail">
 Email
 </label>
 
@@ -1531,119 +1590,123 @@ Email
 id="feedbackEmail"
 type="email"
 placeholder="you@example.com"
-required>
+>
 
 </div>
 
-<div class="field full">
 
-<label>
-What feature interests you most?
+<div class="field">
+
+<label for="feedbackFeature">
+What interests you most?
 </label>
 
-<select
-id="feedbackFeature"
-required>
+<select id="feedbackFeature">
 
 <option value="">
-Select a feature
+Select one
 </option>
 
-<option>
+<option value="UV-C Cleaning">
 UV-C Cleaning
 </option>
 
-<option>
+<option value="Temperature Display">
 Temperature Display
 </option>
 
-<option>
-Smart LED
+<option value="Hydration Tracking">
+Hydration Tracking
 </option>
 
-<option>
-Hydration Reminders
+<option value="LED Indicator">
+LED Indicator
 </option>
 
-<option>
+<option value="Smart Sensors">
 Smart Sensors
 </option>
 
-<option>
-Personalisation
+<option value="Customization">
+Customization
 </option>
 
 </select>
 
 </div>
 
-<div class="field full">
 
-<label>
-Your feedback
+<div class="field">
+
+<label for="feedbackMessage">
+Your Feedback
 </label>
 
 <textarea
-id="feedbackText"
-placeholder="Tell us what you would like ZENG to do..."
-required>
-</textarea>
+id="feedbackMessage"
+placeholder="Tell us what you think..."
+></textarea>
 
 </div>
 
-</div>
 
 <button
 class="btn btn-primary"
-type="submit">
+type="button"
+onclick="submitFeedback()">
 
 Send Feedback →
 
 </button>
 
+
 <div
-class="form-message"
-id="feedbackMessage">
+id="feedbackMessageBox"
+class="form-message">
 </div>
 
-</form>
+</div>
 
 </div>
+
 </div>
+
 </section>
 
-<section id="early">
+
+<!-- EARLY ACCESS -->
+
+<section id="early-access">
 
 <div class="container">
 
-<div
-class="section-head reveal"
-style="margin-left:auto;margin-right:auto;text-align:center;">
+<div class="form-section">
 
-<div class="small">
-Coming soon
-</div>
+<div class="section-head">
 
-<h2>
-Be first with ZENG.
-</h2>
+<div class="eyebrow">Early Access</div>
+
+<h2>Be there<br>from the beginning.</h2>
 
 <p>
-Join the early-access list and stay updated as the
-product moves forward.
+Join the early ZENG community and get updates as the product moves from concept toward launch.
 </p>
 
 </div>
 
-<div class="form-box reveal">
 
-<form id="earlyForm">
+<div class="form-card">
 
-<div class="form-grid">
+<h3>Join Early Access</h3>
+
+<p>
+No payment. Just updates about ZENG.
+</p>
+
 
 <div class="field">
 
-<label>
+<label for="earlyName">
 Name
 </label>
 
@@ -1651,13 +1714,14 @@ Name
 id="earlyName"
 type="text"
 placeholder="Your name"
-required>
+>
 
 </div>
 
+
 <div class="field">
 
-<label>
+<label for="earlyEmail">
 Email
 </label>
 
@@ -1665,132 +1729,132 @@ Email
 id="earlyEmail"
 type="email"
 placeholder="you@example.com"
-required>
+>
 
 </div>
 
-<div class="field full">
 
-<label>
-What are you most interested in?
+<div class="field">
+
+<label for="earlyInterest">
+What are you interested in?
 </label>
 
-<select
-id="earlyInterest"
-required>
+<select id="earlyInterest">
 
 <option value="">
-Choose one
+Select one
 </option>
 
-<option>
-Buying ZENG
+<option value="Launch Updates">
+Launch Updates
 </option>
 
-<option>
-Product updates
+<option value="Product Development">
+Product Development
 </option>
 
-<option>
-Testing the prototype
+<option value="Early Product Access">
+Early Product Access
 </option>
 
-<option>
-Partnership
+<option value="Future Features">
+Future Features
 </option>
 
 </select>
 
 </div>
 
-</div>
 
 <button
 class="btn btn-primary"
-type="submit">
+type="button"
+onclick="joinEarlyAccess()">
 
 Join Early Access →
 
 </button>
 
+
 <div
-class="form-message"
-id="earlyMessage">
+id="earlyMessageBox"
+class="form-message">
 </div>
-
-</form>
 
 </div>
 
 </div>
+
+</div>
+
 </section>
+
+</main>
+
+
+<!-- FOOTER -->
 
 <footer>
 
-<div class="footer-inner">
+<div class="container footer-inner">
 
-<div>
-
-<strong
-style="color:white;letter-spacing:3px;">
+<div class="footer-logo">
 ZENG
-</strong>
-
-<br>
-
-Smart hydration, redesigned.
-
 </div>
 
-<div>
-© 2026 ZENG. Product under development.
+<div class="footer-text">
+© 2026 ZENG. Water. Smarter.
 </div>
 
 </div>
 
 </footer>
 
+
 <!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <script>
 
-/* ==========================================
+/* =========================================
    SUPABASE CONNECTION
-   ========================================== */
+========================================= */
 
 const SUPABASE_URL =
 "https://idfvaqmhgdcyglbvlkay.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
+const SUPABASE_KEY =
 "sb_publishable_0E2drrhzyIJjG-kcb0aWag_ZNrnj_H1";
 
 const supabaseClient =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
 
-/* ==========================================
+/* =========================================
    MOBILE MENU
-   ========================================== */
+========================================= */
 
 function toggleMenu(){
 
-document
-.getElementById("navLinks")
-.classList.toggle("open");
+const nav =
+document.getElementById("navLinks");
+
+nav.classList.toggle("show");
 
 }
 
 
-/* ==========================================
-   CONFIGURATION
-   ========================================== */
+/* =========================================
+   CONFIGURATION STATE
+========================================= */
 
-let config = {
+const config = {
 
 body:"Graphite",
 
@@ -1805,302 +1869,294 @@ finish:"Matte"
 };
 
 
-/* ==========================================
-   BODY
-   ========================================== */
+/* =========================================
+   CONFIGURATION OPTIONS
+========================================= */
 
-function setBody(type,btn){
+function selectOption(button){
+
+const group =
+button.dataset.group;
+
+const value =
+button.dataset.value;
+
+
+/* remove active from same group */
 
 document
-.querySelectorAll('.control-group:nth-child(1) .option')
-.forEach(x=>x.classList.remove('active'));
+.querySelectorAll(
+'.option[data-group="' + group + '"]'
+)
+.forEach(function(option){
 
-btn.classList.add('active');
+option.classList.remove("active");
+
+});
+
+
+/* activate selected */
+
+button.classList.add("active");
+
+
+/* update state */
+
+config[group] = value;
+
+
+/* update preview */
+
+updatePreview();
+
+
+/* update summary */
+
+updateSummary();
+
+}
+
+
+/* =========================================
+   UPDATE PREVIEW
+========================================= */
+
+function updatePreview(){
 
 const bottle =
 document.getElementById("previewBottle");
 
-if(type==="graphite"){
+const led =
+document.getElementById("previewLed");
 
-bottle.style.background =
-"linear-gradient(90deg,#20252b,#858d95,#252b31)";
+const screen =
+document.getElementById("previewScreen");
 
-config.body="Graphite";
+
+/* BODY */
+
+bottle.classList.remove(
+"body-graphite",
+"body-silver",
+"body-ocean"
+);
+
+if(config.body === "Graphite"){
+bottle.classList.add("body-graphite");
+}
+
+if(config.body === "Silver"){
+bottle.classList.add("body-silver");
+}
+
+if(config.body === "Ocean"){
+bottle.classList.add("body-ocean");
+}
+
+
+/* CAP */
+
+bottle.classList.remove(
+"cap-black",
+"cap-silver",
+"cap-white"
+);
+
+if(config.cap === "Black"){
+bottle.classList.add("cap-black");
+}
+
+if(config.cap === "Silver"){
+bottle.classList.add("cap-silver");
+}
+
+if(config.cap === "White"){
+bottle.classList.add("cap-white");
+}
+
+
+/* LED */
+
+led.classList.remove(
+"led-blue",
+"led-green",
+"led-violet"
+);
+
+if(config.led === "Ice Blue"){
+led.classList.add("led-blue");
+}
+
+if(config.led === "Fresh Green"){
+led.classList.add("led-green");
+}
+
+if(config.led === "Violet"){
+led.classList.add("led-violet");
+}
+
+
+/* DISPLAY */
+
+if(config.display === "Temperature"){
+screen.textContent = "24°C";
+}
+
+if(config.display === "Hydration"){
+screen.textContent = "82%";
+}
+
+if(config.display === "Minimal"){
+screen.textContent = "ZENG";
+}
 
 }
 
-if(type==="silver"){
 
-bottle.style.background =
-"linear-gradient(90deg,#737b83,#e1e5e8,#70777d)";
+/* =========================================
+   UPDATE SUMMARY
+========================================= */
 
-config.body="Silver";
+function updateSummary(){
 
-}
-
-if(type==="ocean"){
-
-bottle.style.background =
-"linear-gradient(90deg,#102d3b,#31657b,#102b38)";
-
-config.body="Ocean";
-
-}
-
-document.getElementById("sumBody").textContent =
+document.getElementById("summaryBody").textContent =
 config.body;
 
-updatePreviewText();
-
-}
-
-
-/* ==========================================
-   CAP
-   ========================================== */
-
-function setCap(type,btn){
-
-btn.parentElement
-.querySelectorAll('.option')
-.forEach(x=>x.classList.remove('active'));
-
-btn.classList.add('active');
-
-const cap =
-document.getElementById("previewCap");
-
-if(type==="black"){
-
-cap.style.background =
-"linear-gradient(90deg,#101418,#3b4249,#101418)";
-
-config.cap="Black";
-
-}
-
-if(type==="silver"){
-
-cap.style.background =
-"linear-gradient(90deg,#727a81,#d8dde1,#737a80)";
-
-config.cap="Silver";
-
-}
-
-if(type==="white"){
-
-cap.style.background =
-"linear-gradient(90deg,#bfc4c8,#ffffff,#b8bdc1)";
-
-config.cap="White";
-
-}
-
-document.getElementById("sumCap").textContent =
+document.getElementById("summaryCap").textContent =
 config.cap;
 
-updatePreviewText();
+document.getElementById("summaryLed").textContent =
+config.led;
 
-}
+document.getElementById("summaryDisplay").textContent =
+config.display;
 
-
-/* ==========================================
-   LED
-   ========================================== */
-
-function setLed(color,name,btn){
-
-btn.parentElement
-.querySelectorAll('.option')
-.forEach(x=>x.classList.remove('active'));
-
-btn.classList.add('active');
-
-document.getElementById("previewLed")
-.style.background=color;
-
-document.getElementById("previewLed")
-.style.boxShadow=
-"0 0 18px "+color;
-
-document.getElementById("previewBottle")
-.style.setProperty("--accent",color);
-
-document.getElementById("previewDisplay")
-.style.color=color;
-
-config.led=name;
-
-document.getElementById("sumLed").textContent =
-name;
-
-updatePreviewText();
-
-}
-
-
-/* ==========================================
-   DISPLAY
-   ========================================== */
-
-function setDisplay(value,name,btn){
-
-btn.parentElement
-.querySelectorAll('.option')
-.forEach(x=>x.classList.remove('active'));
-
-btn.classList.add('active');
-
-document.getElementById("previewDisplay")
-.textContent=value;
-
-if(name==="Temperature"){
-
-document.getElementById("previewDisplaySub")
-.textContent="ZENG SMART";
-
-}
-
-if(name==="Hydration"){
-
-document.getElementById("previewDisplaySub")
-.textContent="HYDRATION";
-
-}
-
-if(name==="Minimal"){
-
-document.getElementById("previewDisplaySub")
-.textContent="ZENG";
-
-}
-
-config.display=name;
-
-document.getElementById("sumDisplay").textContent =
-name;
-
-}
-
-
-/* ==========================================
-   FINISH
-   ========================================== */
-
-function setFinish(type,btn){
-
-btn.parentElement
-.querySelectorAll('.option')
-.forEach(x=>x.classList.remove('active'));
-
-btn.classList.add('active');
-
-const bottle =
-document.getElementById("previewBottle");
-
-if(type==="matte"){
-
-bottle.style.filter="saturate(.9)";
-
-config.finish="Matte";
-
-}
-
-if(type==="metal"){
-
-bottle.style.filter=
-"saturate(1.2) brightness(1.08)";
-
-config.finish="Metallic";
-
-}
-
-if(type==="soft"){
-
-bottle.style.filter=
-"brightness(.94)";
-
-config.finish="Soft Touch";
-
-}
-
-document.getElementById("sumFinish").textContent =
+document.getElementById("summaryFinish").textContent =
 config.finish;
 
 }
 
 
-/* ==========================================
-   PREVIEW TEXT
-   ========================================== */
-
-function updatePreviewText(){
-
-document.getElementById("previewText")
-.textContent =
-config.body+" · "+
-config.cap+" Cap · "+
-config.led+" LED";
-
-}
-
-
-/* ==========================================
-   SAVE BUILD CONFIGURATION
-   ========================================== */
+/* =========================================
+   SAVE CONFIGURATION
+   IMPORTANT:
+   Uses visible inputs.
+   No browser prompt.
+========================================= */
 
 async function saveConfiguration(){
 
 const message =
 document.getElementById("configMessage");
 
-message.className="form-message";
+const nameInput =
+document.getElementById("configName");
 
-message.style.display="block";
+const emailInput =
+document.getElementById("configEmail");
 
-message.textContent=
-"Saving configuration...";
 
-const name =
-prompt("Enter your name:");
+const cleanName =
+nameInput.value.trim();
 
-if(!name){
+const cleanEmail =
+emailInput.value.trim();
 
-message.style.display="none";
 
-return;
+/* VALIDATION */
 
-}
+if(!cleanName){
 
-const email =
-prompt("Enter your email:");
+message.className =
+"config-message error";
 
-if(!email){
+message.style.display =
+"block";
 
-message.style.display="none";
+message.textContent =
+"Please enter your name.";
 
-return;
-
-}
-
-const cleanName=name.trim();
-
-const cleanEmail=email.trim();
-
-if(!cleanName || !cleanEmail){
-
-message.className=
-"form-message error";
-
-message.textContent=
-"Please enter a valid name and email.";
+nameInput.focus();
 
 return;
 
 }
 
-const {error} =
+
+if(!cleanEmail){
+
+message.className =
+"config-message error";
+
+message.style.display =
+"block";
+
+message.textContent =
+"Please enter your email.";
+
+emailInput.focus();
+
+return;
+
+}
+
+
+if(!emailInput.checkValidity()){
+
+message.className =
+"config-message error";
+
+message.style.display =
+"block";
+
+message.textContent =
+"Please enter a valid email address.";
+
+emailInput.focus();
+
+return;
+
+}
+
+
+/* SAVING */
+
+message.className =
+"config-message";
+
+message.style.display =
+"block";
+
+message.textContent =
+"Saving your ZENG configuration...";
+
+
+/*
+IMPORTANT:
+
+Current Supabase table:
+
+zeng_configurations
+
+Current columns:
+
+id
+created at
+name
+email
+bottle colour
+ledcolor
+display style
+finish
+
+There is currently NO cap column.
+
+Therefore cap is kept in the website preview/summary,
+but is intentionally NOT inserted into the database.
+*/
+
+
+const { error } =
 await supabaseClient
 .from("zeng_configurations")
 .insert([{
@@ -2110,8 +2166,6 @@ name:cleanName,
 email:cleanEmail,
 
 "bottle colour":config.body,
-
-
 
 ledcolor:config.led,
 
@@ -2124,47 +2178,50 @@ finish:config.finish
 
 if(error){
 
-console.error(error);
+console.error(
+"ZENG configuration error:",
+error
+);
 
-message.className=
-"form-message error";
+message.className =
+"config-message error";
 
-message.textContent=
+message.textContent =
 "Could not save configuration. Please try again.";
 
 return;
 
 }
 
-message.className="form-message";
 
-message.textContent=
-"✓ Your ZENG configuration has been saved.";
+/* SUCCESS */
+
+message.className =
+"config-message";
+
+message.textContent =
+"✓ Your ZENG configuration has been saved successfully.";
+
+
+/* clear inputs */
+
+nameInput.value = "";
+emailInput.value = "";
 
 }
 
 
-/* ==========================================
-   FEEDBACK FORM
-   ========================================== */
+/* =========================================
+   FEEDBACK
+========================================= */
 
-document
-.getElementById("feedbackForm")
-.addEventListener(
-"submit",
-async function(e){
+async function submitFeedback(){
 
-e.preventDefault();
+const messageBox =
+document.getElementById(
+"feedbackMessageBox"
+);
 
-const message =
-document.getElementById("feedbackMessage");
-
-message.className="form-message";
-
-message.style.display="block";
-
-message.textContent=
-"Sending feedback...";
 
 const name =
 document
@@ -2172,22 +2229,100 @@ document
 .value
 .trim();
 
+
 const email =
 document
 .getElementById("feedbackEmail")
 .value
 .trim();
 
+
 const feature =
 document
 .getElementById("feedbackFeature")
 .value;
 
-const feedback =
+
+const message =
 document
-.getElementById("feedbackText")
+.getElementById("feedbackMessage")
 .value
 .trim();
+
+
+if(!name){
+
+messageBox.className =
+"form-message error";
+
+messageBox.style.display =
+"block";
+
+messageBox.textContent =
+"Please enter your name.";
+
+return;
+
+}
+
+
+if(!email){
+
+messageBox.className =
+"form-message error";
+
+messageBox.style.display =
+"block";
+
+messageBox.textContent =
+"Please enter your email.";
+
+return;
+
+}
+
+
+if(!feature){
+
+messageBox.className =
+"form-message error";
+
+messageBox.style.display =
+"block";
+
+messageBox.textContent =
+"Please select what interests you most.";
+
+return;
+
+}
+
+
+if(!message){
+
+messageBox.className =
+"form-message error";
+
+messageBox.style.display =
+"block";
+
+messageBox.textContent =
+"Please write your feedback.";
+
+return;
+
+}
+
+
+messageBox.className =
+"form-message";
+
+messageBox.style.display =
+"block";
+
+messageBox.textContent =
+"Sending feedback...";
+
 
 const {error} =
 await supabaseClient
@@ -2200,56 +2335,66 @@ email:email,
 
 feature:feature,
 
-message:feedback
+message:message
 
 }]);
 
 
 if(error){
 
-console.error(error);
+console.error(
+"ZENG feedback error:",
+error
+);
 
-message.className=
+messageBox.className =
 "form-message error";
 
-message.textContent=
+messageBox.textContent =
 "Could not send feedback. Please try again.";
 
 return;
 
 }
 
-message.className="form-message";
 
-message.textContent=
+messageBox.className =
+"form-message";
+
+messageBox.textContent =
 "✓ Thanks! Your feedback has been recorded.";
 
-this.reset();
-
-});
-
-
-/* ==========================================
-   EARLY ACCESS FORM
-   ========================================== */
 
 document
-.getElementById("earlyForm")
-.addEventListener(
-"submit",
-async function(e){
+.getElementById("feedbackName")
+.value = "";
 
-e.preventDefault();
+document
+.getElementById("feedbackEmail")
+.value = "";
 
-const message =
-document.getElementById("earlyMessage");
+document
+.getElementById("feedbackFeature")
+.value = "";
 
-message.className="form-message";
+document
+.getElementById("feedbackMessage")
+.value = "";
 
-message.style.display="block";
+}
 
-message.textContent=
-"Joining early access...";
+
+/* =========================================
+   EARLY ACCESS
+========================================= */
+
+async function joinEarlyAccess(){
+
+const messageBox =
+document.getElementById(
+"earlyMessageBox"
+);
+
 
 const name =
 document
@@ -2257,16 +2402,77 @@ document
 .value
 .trim();
 
+
 const email =
 document
 .getElementById("earlyEmail")
 .value
 .trim();
 
+
 const interest =
 document
 .getElementById("earlyInterest")
 .value;
+
+
+if(!name){
+
+messageBox.className =
+"form-message error";
+
+messageBox.style.display =
+"block";
+
+messageBox.textContent =
+"Please enter your name.";
+
+return;
+
+}
+
+
+if(!email){
+
+messageBox.className =
+"form-message error";
+
+messageBox.style.display =
+"block";
+
+messageBox.textContent =
+"Please enter your email.";
+
+return;
+
+}
+
+
+if(!interest){
+
+messageBox.className =
+"form-message error";
+
+messageBox.style.display =
+"block";
+
+messageBox.textContent =
+"Please select your interest.";
+
+return;
+
+}
+
+
+messageBox.className =
+"form-message";
+
+messageBox.style.display =
+"block";
+
+messageBox.textContent =
+"Joining Early Access...";
+
 
 const {error} =
 await supabaseClient
@@ -2284,58 +2490,54 @@ interest:interest
 
 if(error){
 
-console.error(error);
+console.error(
+"ZENG early access error:",
+error
+);
 
-message.className=
+messageBox.className =
 "form-message error";
 
-message.textContent=
-"Could not join early access. Please try again.";
+messageBox.textContent =
+"Could not join Early Access. Please try again.";
 
 return;
 
 }
 
-message.className="form-message";
 
-message.textContent=
-"✓ You're on the ZENG early-access list.";
+messageBox.className =
+"form-message";
 
-this.reset();
-
-});
+messageBox.textContent =
+"✓ You're on the ZENG Early Access list.";
 
 
-/* ==========================================
-   SCROLL ANIMATION
-   ========================================== */
+document
+.getElementById("earlyName")
+.value = "";
 
-const observer =
-new IntersectionObserver(
+document
+.getElementById("earlyEmail")
+.value = "";
 
-(entries)=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-entry.target.classList.add("show");
+document
+.getElementById("earlyInterest")
+.value = "";
 
 }
 
-});
 
-},
+/* =========================================
+   INITIALIZE
+========================================= */
 
-{threshold:.12}
+updatePreview();
 
-);
-
-document
-.querySelectorAll(".reveal")
-.forEach(el=>observer.observe(el));
+updateSummary();
 
 </script>
 
 </body>
 </html>
+```
