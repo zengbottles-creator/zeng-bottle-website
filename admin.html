@@ -3,159 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZENG — Admin Dashboard</title>
+<title>ZENG Admin Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
 }
 
 body{
-  font-family:Inter,Arial,Helvetica,sans-serif;
-  background:#05070a;
-  color:#f5f7fa;
-  line-height:1.5;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#080a0f;
+  color:#fff;
+  min-height:100vh;
 }
 
-button,input{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.header{
-  border-bottom:1px solid rgba(255,255,255,.09);
-  background:rgba(5,7,10,.9);
-  position:sticky;
-  top:0;
-  z-index:10;
-}
-
-.header-inner{
-  max-width:1200px;
-  margin:auto;
-  min-height:75px;
-  padding:15px 24px;
+header{
+  padding:22px 6%;
+  border-bottom:1px solid #222;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:20px;
 }
 
 .logo{
-  font-size:24px;
-  font-weight:900;
+  font-size:25px;
+  font-weight:800;
   letter-spacing:4px;
 }
 
-.logo span{
-  color:#7ee7ff;
+.header-right{
+  display:flex;
+  gap:10px;
 }
 
-.admin-label{
-  color:#9aa5b1;
-  font-size:13px;
+button{
+  border:0;
+  border-radius:10px;
+  padding:11px 16px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.refresh{
+  background:#fff;
+  color:#000;
 }
 
 .logout{
-  border:1px solid rgba(255,255,255,.12);
-  background:#10151b;
-  color:white;
-  padding:10px 16px;
-  border-radius:999px;
-}
-
-.logout:hover{
-  background:#181f27;
+  background:#1b1e25;
+  color:#fff;
 }
 
 .container{
-  max-width:1200px;
-  margin:auto;
-  padding:45px 24px 80px;
+  width:88%;
+  max-width:1400px;
+  margin:35px auto;
+}
+
+.login-box{
+  width:100%;
+  max-width:430px;
+  margin:100px auto;
+  background:#10131a;
+  padding:35px;
+  border:1px solid #252936;
+  border-radius:18px;
 }
 
 h1{
-  font-size:clamp(35px,6vw,65px);
-  letter-spacing:-3px;
-  line-height:1;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 .subtitle{
-  color:#9aa5b1;
-  margin-bottom:40px;
-}
-
-.login-card,
-.panel{
-  border:1px solid rgba(255,255,255,.09);
-  background:rgba(255,255,255,.035);
-  border-radius:24px;
-  padding:30px;
-}
-
-.login-card{
-  max-width:500px;
-  margin:80px auto;
-}
-
-.login-card h2{
+  color:#9ca3af;
   margin-bottom:25px;
 }
 
-.field{
-  margin-bottom:16px;
-}
-
-.field label{
-  display:block;
-  color:#aeb7c0;
-  font-size:13px;
-  margin-bottom:7px;
-}
-
-.field input{
+input,select{
   width:100%;
-  padding:13px 14px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.1);
-  background:#080c11;
-  color:white;
+  padding:13px;
+  margin-bottom:15px;
+  border-radius:9px;
+  border:1px solid #303542;
+  background:#080a0f;
+  color:#fff;
   outline:none;
 }
 
-.field input:focus{
-  border-color:#7ee7ff;
-}
-
-.primary{
+.login-btn{
   width:100%;
-  border:0;
-  border-radius:999px;
-  padding:14px 20px;
-  background:white;
-  color:#05070a;
-  font-weight:800;
+  background:#fff;
+  color:#000;
 }
 
-.primary:hover{
-  transform:translateY(-1px);
-}
-
-.message{
+#error{
+  color:#ff7777;
   margin-top:15px;
-  font-size:13px;
-  color:#7ee7ff;
-  display:none;
-}
-
-.error{
-  color:#ff8d8d;
 }
 
 .dashboard{
@@ -166,714 +113,550 @@ h1{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:18px;
-  margin-bottom:30px;
+  margin:30px 0;
 }
 
 .stat{
-  border:1px solid rgba(255,255,255,.09);
-  background:rgba(255,255,255,.035);
-  border-radius:20px;
+  background:#10131a;
+  border:1px solid #252936;
+  border-radius:16px;
   padding:25px;
 }
 
-.stat-number{
-  font-size:38px;
-  font-weight:900;
-  color:#7ee7ff;
-}
-
 .stat-title{
-  color:#9aa5b1;
-  font-size:13px;
+  color:#9ca3af;
+  font-size:14px;
+  margin-bottom:10px;
 }
 
-.panel{
+.stat-number{
+  font-size:35px;
+  font-weight:800;
+}
+
+.toolbar{
+  background:#10131a;
+  border:1px solid #252936;
+  border-radius:16px;
+  padding:18px;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr auto auto;
+  gap:10px;
   margin-bottom:25px;
-  overflow:hidden;
 }
 
-.panel-head{
+.toolbar input,
+.toolbar select{
+  margin:0;
+}
+
+.export{
+  background:#dff7e8;
+  color:#07130b;
+}
+
+.section{
+  margin-bottom:35px;
+}
+
+.section-title{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:15px;
-  margin-bottom:20px;
-  flex-wrap:wrap;
+  margin-bottom:12px;
 }
 
-.panel h2{
-  font-size:24px;
-}
-
-.refresh{
-  border:1px solid rgba(255,255,255,.1);
-  background:#0b1016;
-  color:white;
-  padding:9px 15px;
-  border-radius:999px;
+.section-title h2{
+  font-size:21px;
 }
 
 .table-wrap{
   overflow-x:auto;
+  background:#10131a;
+  border:1px solid #252936;
+  border-radius:15px;
 }
 
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:650px;
+  min-width:700px;
 }
 
-th,
-td{
-  padding:13px 12px;
+th,td{
+  padding:14px;
   text-align:left;
-  border-bottom:1px solid rgba(255,255,255,.07);
-  font-size:13px;
+  border-bottom:1px solid #242833;
+  font-size:14px;
 }
 
 th{
-  color:#7ee7ff;
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:1px;
+  color:#aeb4c0;
+  background:#0c0f15;
 }
 
 td{
-  color:#cbd2da;
+  color:#e7e9ed;
 }
 
 .empty{
-  color:#697581;
-  padding:20px 0;
+  text-align:center;
+  padding:30px;
+  color:#888;
 }
 
 .status{
-  margin-bottom:20px;
-  padding:13px 15px;
-  border-radius:12px;
-  background:rgba(126,231,255,.06);
-  border:1px solid rgba(126,231,255,.12);
-  color:#7ee7ff;
-  display:none;
+  margin:12px 0;
+  color:#7ee2a8;
 }
 
-@media(max-width:700px){
+@media(max-width:850px){
+  .stats{
+    grid-template-columns:1fr;
+  }
 
-.header-inner{
-  align-items:flex-start;
-}
+  .toolbar{
+    grid-template-columns:1fr;
+  }
 
-.stats{
-  grid-template-columns:1fr;
-}
+  header{
+    padding:18px 5%;
+  }
 
-.container{
-  padding:30px 16px 60px;
-}
+  .header-right button{
+    padding:9px 11px;
+  }
 
-.panel{
-  padding:20px;
-}
-
-h1{
-  letter-spacing:-2px;
-}
-
+  .container{
+    width:92%;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header class="header">
-  <div class="header-inner">
+<header>
+  <div class="logo">ZENG</div>
 
-    <div>
-      <div class="logo">ZEN<span>G</span></div>
-      <div class="admin-label">Admin Dashboard</div>
-    </div>
-
-    <button
-      class="logout"
-      id="logoutBtn"
-      style="display:none;"
-      onclick="logout()">
-      Logout
-    </button>
-
+  <div class="header-right" id="headerButtons" style="display:none;">
+    <button class="refresh" onclick="loadDashboard()">Refresh</button>
+    <button class="logout" onclick="logout()">Logout</button>
   </div>
 </header>
 
+<div class="container">
 
-<!-- LOGIN -->
+  <!-- LOGIN -->
+  <div class="login-box" id="loginBox">
+    <h1>Admin Login</h1>
+    <p class="subtitle">ZENG Management Dashboard</p>
 
-<section id="loginSection">
+    <input type="email" id="email" placeholder="Admin email">
+    <input type="password" id="password" placeholder="Password">
 
-  <div class="login-card">
+    <button class="login-btn" onclick="login()">Login</button>
 
-    <h2>Admin Login</h2>
-
-    <div class="field">
-
-      <label>Email</label>
-
-      <input
-        type="email"
-        id="loginEmail"
-        placeholder="Admin email"
-        autocomplete="email">
-
-    </div>
-
-    <div class="field">
-
-      <label>Password</label>
-
-      <input
-        type="password"
-        id="loginPassword"
-        placeholder="Admin password"
-        autocomplete="current-password">
-
-    </div>
-
-    <button
-      class="primary"
-      onclick="login()">
-
-      Login to Dashboard →
-
-    </button>
-
-    <div
-      class="message"
-      id="loginMessage">
-    </div>
-
+    <div id="error"></div>
   </div>
 
-</section>
+  <!-- DASHBOARD -->
+  <div class="dashboard" id="dashboard">
 
-
-<!-- DASHBOARD -->
-
-<section
-  class="dashboard"
-  id="dashboard">
-
-  <div class="container">
-
-    <h1>ZENG Dashboard</h1>
-
-    <p class="subtitle">
-      Manage early-access requests, customer feedback and bottle configurations.
-    </p>
-
-    <div
-      class="status"
-      id="statusMessage">
-    </div>
-
-
-    <!-- STATS -->
+    <h1>Dashboard</h1>
+    <p class="subtitle">Manage ZENG customers, feedback and product configurations.</p>
 
     <div class="stats">
 
       <div class="stat">
-
-        <div
-          class="stat-number"
-          id="earlyCount">
-          0
-        </div>
-
-        <div class="stat-title">
-          Early Access
-        </div>
-
+        <div class="stat-title">Early Access</div>
+        <div class="stat-number" id="earlyCount">0</div>
       </div>
 
-
       <div class="stat">
-
-        <div
-          class="stat-number"
-          id="feedbackCount">
-          0
-        </div>
-
-        <div class="stat-title">
-          Feedback
-        </div>
-
+        <div class="stat-title">Feedback</div>
+        <div class="stat-number" id="feedbackCount">0</div>
       </div>
 
-
       <div class="stat">
-
-        <div
-          class="stat-number"
-          id="configCount">
-          0
-        </div>
-
-        <div class="stat-title">
-          Configurations
-        </div>
-
+        <div class="stat-title">Configurations</div>
+        <div class="stat-number" id="configCount">0</div>
       </div>
 
     </div>
 
+    <div class="toolbar">
+
+      <input
+        type="text"
+        id="search"
+        placeholder="Search name, email, feature..."
+        oninput="renderAll()"
+      >
+
+      <select id="tableFilter" onchange="renderAll()">
+        <option value="all">All Data</option>
+        <option value="early">Early Access</option>
+        <option value="feedback">Feedback</option>
+        <option value="config">Configurations</option>
+      </select>
+
+      <select id="sortFilter" onchange="renderAll()">
+        <option value="new">Newest First</option>
+        <option value="old">Oldest First</option>
+      </select>
+
+      <button class="export" onclick="exportCSV()">Export CSV</button>
+
+      <button class="refresh" onclick="loadDashboard()">Refresh</button>
+
+    </div>
+
+    <div class="status" id="status"></div>
 
     <!-- EARLY ACCESS -->
+    <div class="section" id="earlySection">
 
-    <div class="panel">
-
-      <div class="panel-head">
-
+      <div class="section-title">
         <h2>Early Access Requests</h2>
-
-        <button
-          class="refresh"
-          onclick="loadDashboard()">
-          Refresh
-        </button>
-
       </div>
 
-      <div
-        class="table-wrap"
-        id="earlyTable">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Interest</th>
+            </tr>
+          </thead>
+
+          <tbody id="earlyTable"></tbody>
+        </table>
       </div>
 
     </div>
-
 
     <!-- FEEDBACK -->
+    <div class="section" id="feedbackSection">
 
-    <div class="panel">
-
-      <div class="panel-head">
-
+      <div class="section-title">
         <h2>Customer Feedback</h2>
-
       </div>
 
-      <div
-        class="table-wrap"
-        id="feedbackTable">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Feature</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+
+          <tbody id="feedbackTable"></tbody>
+        </table>
       </div>
 
     </div>
 
-
     <!-- CONFIGURATIONS -->
+    <div class="section" id="configSection">
 
-    <div class="panel">
-
-      <div class="panel-head">
-
-        <h2>Build Your ZENG Requests</h2>
-
+      <div class="section-title">
+        <h2>Custom ZENG Configurations</h2>
       </div>
 
-      <div
-        class="table-wrap"
-        id="configTable">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Bottle</th>
+              <th>Cap</th>
+              <th>LED</th>
+              <th>Display</th>
+              <th>Finish</th>
+            </tr>
+          </thead>
+
+          <tbody id="configTable"></tbody>
+        </table>
       </div>
 
     </div>
 
   </div>
-
-</section>
-
-
-<!-- SUPABASE -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</div>
 
 <script>
 
 const SUPABASE_URL =
 "https://idfvaqmhgdcyglbvlkay.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
+const SUPABASE_KEY =
 "sb_publishable_0E2drrhzyIJjG-kcb0aWag_ZNrnj_H1";
 
 const supabaseClient =
 window.supabase.createClient(
   SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
+  SUPABASE_KEY
 );
 
-
-/* ============================
-   LOGIN
-============================ */
+let earlyData = [];
+let feedbackData = [];
+let configData = [];
 
 async function login(){
 
   const email =
-    document.getElementById("loginEmail")
-    .value
-    .trim();
+    document.getElementById("email").value.trim();
 
   const password =
-    document.getElementById("loginPassword")
-    .value;
+    document.getElementById("password").value;
 
-  const message =
-    document.getElementById("loginMessage");
+  const error =
+    document.getElementById("error");
 
-  message.style.display="block";
-  message.className="message";
-  message.textContent="Signing in...";
+  error.textContent = "";
 
   if(!email || !password){
-
-    message.className="message error";
-    message.textContent=
-      "Please enter email and password.";
-
+    error.textContent = "Please enter email and password.";
     return;
   }
 
-  const {data,error} =
+  const {data,error:loginError} =
     await supabaseClient.auth.signInWithPassword({
-      email:email,
-      password:password
+      email,
+      password
     });
 
-  if(error){
-
-    console.error(error);
-
-    message.className="message error";
-    message.textContent=
-      "Login failed. Please check your email and password.";
-
+  if(loginError){
+    error.textContent = loginError.message;
     return;
   }
 
-  message.style.display="none";
-
   showDashboard();
-
 }
-
-
-/* ============================
-   SHOW DASHBOARD
-============================ */
-
-function showDashboard(){
-
-  document
-    .getElementById("loginSection")
-    .style.display="none";
-
-  document
-    .getElementById("dashboard")
-    .style.display="block";
-
-  document
-    .getElementById("logoutBtn")
-    .style.display="block";
-
-  loadDashboard();
-
-}
-
-
-/* ============================
-   LOGOUT
-============================ */
 
 async function logout(){
 
   await supabaseClient.auth.signOut();
 
-  document
-    .getElementById("dashboard")
-    .style.display="none";
-
-  document
-    .getElementById("loginSection")
-    .style.display="block";
-
-  document
-    .getElementById("logoutBtn")
-    .style.display="none";
+  document.getElementById("dashboard").style.display="none";
+  document.getElementById("loginBox").style.display="block";
+  document.getElementById("headerButtons").style.display="none";
 
 }
 
+function showDashboard(){
 
-/* ============================
-   DASHBOARD DATA
-============================ */
+  document.getElementById("loginBox").style.display="none";
+  document.getElementById("dashboard").style.display="block";
+  document.getElementById("headerButtons").style.display="flex";
+
+  loadDashboard();
+}
 
 async function loadDashboard(){
 
-  const status =
-    document.getElementById("statusMessage");
+  document.getElementById("status").textContent =
+    "Loading latest data...";
 
-  status.style.display="block";
-  status.textContent="Loading dashboard data...";
-
-
-  const earlyResult =
+  const early =
     await supabaseClient
       .from("zeng_early_access")
-      .select("*")
-      .order("id",{ascending:false});
+      .select("*");
 
-
-  const feedbackResult =
+  const feedback =
     await supabaseClient
       .from("zeng_feedback")
-      .select("*")
-      .order("id",{ascending:false});
+      .select("*");
 
-
-  const configResult =
+  const configs =
     await supabaseClient
       .from("zeng_configurations")
-      .select("*")
-      .order("id",{ascending:false});
+      .select("*");
 
-
-  if(
-    earlyResult.error ||
-    feedbackResult.error ||
-    configResult.error
-  ){
-
-    console.error(
-      earlyResult.error,
-      feedbackResult.error,
-      configResult.error
-    );
-
-    status.className="status error";
-
-    status.textContent=
-      "Could not load dashboard data. Check database policies.";
-
+  if(early.error){
+    document.getElementById("status").textContent =
+      early.error.message;
     return;
   }
 
+  if(feedback.error){
+    document.getElementById("status").textContent =
+      feedback.error.message;
+    return;
+  }
 
-  document.getElementById("earlyCount")
-    .textContent=earlyResult.data.length;
+  if(configs.error){
+    document.getElementById("status").textContent =
+      configs.error.message;
+    return;
+  }
 
-  document.getElementById("feedbackCount")
-    .textContent=feedbackResult.data.length;
+  earlyData = early.data || [];
+  feedbackData = feedback.data || [];
+  configData = configs.data || [];
 
-  document.getElementById("configCount")
-    .textContent=configResult.data.length;
+  document.getElementById("earlyCount").textContent =
+    earlyData.length;
 
+  document.getElementById("feedbackCount").textContent =
+    feedbackData.length;
 
-  renderEarlyAccess(
-    earlyResult.data
-  );
+  document.getElementById("configCount").textContent =
+    configData.length;
 
-  renderFeedback(
-    feedbackResult.data
-  );
+  renderAll();
 
-  renderConfigurations(
-    configResult.data
-  );
-
-
-  status.className="status";
-
-  status.textContent=
+  document.getElementById("status").textContent =
     "Dashboard updated successfully.";
-
 }
 
+function renderAll(){
 
-/* ============================
-   EARLY ACCESS TABLE
-============================ */
+  const search =
+    document.getElementById("search").value
+      .toLowerCase()
+      .trim();
 
-function renderEarlyAccess(rows){
+  const filter =
+    document.getElementById("tableFilter").value;
 
-  const box =
+  const sort =
+    document.getElementById("sortFilter").value;
+
+  const sortData = data => {
+
+    const copy = [...data];
+
+    copy.sort((a,b)=>{
+
+      const x = Number(a.id || 0);
+      const y = Number(b.id || 0);
+
+      return sort === "new" ? y-x : x-y;
+
+    });
+
+    return copy;
+  };
+
+  const match = row => {
+
+    if(!search) return true;
+
+    return Object.values(row)
+      .join(" ")
+      .toLowerCase()
+      .includes(search);
+  };
+
+  const early =
+    sortData(earlyData.filter(match));
+
+  const feedback =
+    sortData(feedbackData.filter(match));
+
+  const configs =
+    sortData(configData.filter(match));
+
+  document.getElementById("earlySection").style.display =
+    filter==="all" || filter==="early"
+      ? "block" : "none";
+
+  document.getElementById("feedbackSection").style.display =
+    filter==="all" || filter==="feedback"
+      ? "block" : "none";
+
+  document.getElementById("configSection").style.display =
+    filter==="all" || filter==="config"
+      ? "block" : "none";
+
+  renderEarly(early);
+  renderFeedback(feedback);
+  renderConfigs(configs);
+}
+
+function renderEarly(data){
+
+  const table =
     document.getElementById("earlyTable");
 
-  if(!rows.length){
-
-    box.innerHTML=
-      '<div class="empty">No early-access requests yet.</div>';
-
+  if(!data.length){
+    table.innerHTML =
+      `<tr><td colspan="4" class="empty">No records found.</td></tr>`;
     return;
   }
 
-  let html=`
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Interest</th>
-      </tr>
-    </thead>
-    <tbody>
-  `;
-
-  rows.forEach(row=>{
-
-    html+=`
-      <tr>
-        <td>${escapeHTML(row.id)}</td>
-        <td>${escapeHTML(row.name)}</td>
-        <td>${escapeHTML(row.email)}</td>
-        <td>${escapeHTML(row.interest)}</td>
-      </tr>
-    `;
-
-  });
-
-  html+=`
-    </tbody>
-  </table>
-  `;
-
-  box.innerHTML=html;
-
+  table.innerHTML = data.map(row => `
+    <tr>
+      <td>${escapeHTML(row.id)}</td>
+      <td>${escapeHTML(row.name)}</td>
+      <td>${escapeHTML(row.email)}</td>
+      <td>${escapeHTML(row.interest)}</td>
+    </tr>
+  `).join("");
 }
 
+function renderFeedback(data){
 
-/* ============================
-   FEEDBACK TABLE
-============================ */
-
-function renderFeedback(rows){
-
-  const box =
+  const table =
     document.getElementById("feedbackTable");
 
-  if(!rows.length){
-
-    box.innerHTML=
-      '<div class="empty">No feedback yet.</div>';
-
+  if(!data.length){
+    table.innerHTML =
+      `<tr><td colspan="5" class="empty">No records found.</td></tr>`;
     return;
   }
 
-  let html=`
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Feature</th>
-        <th>Message</th>
-      </tr>
-    </thead>
-    <tbody>
-  `;
-
-  rows.forEach(row=>{
-
-    html+=`
-      <tr>
-        <td>${escapeHTML(row.id)}</td>
-        <td>${escapeHTML(row.name)}</td>
-        <td>${escapeHTML(row.email)}</td>
-        <td>${escapeHTML(row.feature)}</td>
-        <td>${escapeHTML(row.message)}</td>
-      </tr>
-    `;
-
-  });
-
-  html+=`
-    </tbody>
-  </table>
-  `;
-
-  box.innerHTML=html;
-
+  table.innerHTML = data.map(row => `
+    <tr>
+      <td>${escapeHTML(row.id)}</td>
+      <td>${escapeHTML(row.name)}</td>
+      <td>${escapeHTML(row.email)}</td>
+      <td>${escapeHTML(row.feature)}</td>
+      <td>${escapeHTML(row.message)}</td>
+    </tr>
+  `).join("");
 }
 
+function renderConfigs(data){
 
-/* ============================
-   CONFIGURATION TABLE
-============================ */
-
-function renderConfigurations(rows){
-
-  const box =
+  const table =
     document.getElementById("configTable");
 
-  if(!rows.length){
-
-    box.innerHTML=
-      '<div class="empty">No ZENG configurations yet.</div>';
-
+  if(!data.length){
+    table.innerHTML =
+      `<tr><td colspan="8" class="empty">No records found.</td></tr>`;
     return;
   }
 
-  let html=`
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Bottle</th>
-        <th>Cap</th>
-        <th>LED</th>
-        <th>Display</th>
-        <th>Finish</th>
-      </tr>
-    </thead>
-    <tbody>
-  `;
-
-  rows.forEach(row=>{
-
-    html+=`
-      <tr>
-        <td>${escapeHTML(row.id)}</td>
-        <td>${escapeHTML(row.name)}</td>
-        <td>${escapeHTML(row.email)}</td>
-        <td>${escapeHTML(row.bottle_color)}</td>
-        <td>${escapeHTML(row.cap_color)}</td>
-        <td>${escapeHTML(row.led_color)}</td>
-        <td>${escapeHTML(row.display_style)}</td>
-        <td>${escapeHTML(row.finish)}</td>
-      </tr>
-    `;
-
-  });
-
-  html+=`
-    </tbody>
-  </table>
-  `;
-
-  box.innerHTML=html;
-
+  table.innerHTML = data.map(row => `
+    <tr>
+      <td>${escapeHTML(row.id)}</td>
+      <td>${escapeHTML(row.name)}</td>
+      <td>${escapeHTML(row.email)}</td>
+      <td>${escapeHTML(row.bottle_color)}</td>
+      <td>${escapeHTML(row.cap_color)}</td>
+      <td>${escapeHTML(row.led_color)}</td>
+      <td>${escapeHTML(row.display_style)}</td>
+      <td>${escapeHTML(row.finish)}</td>
+    </tr>
+  `).join("");
 }
-
-
-/* ============================
-   SECURITY
-============================ */
 
 function escapeHTML(value){
 
-  if(value === null || value === undefined){
+  if(value === null || value === undefined)
     return "";
-  }
 
   return String(value)
     .replace(/&/g,"&amp;")
@@ -881,31 +664,75 @@ function escapeHTML(value){
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
-
 }
 
+function exportCSV(){
 
-/* ============================
-   CHECK EXISTING SESSION
-============================ */
+  const filter =
+    document.getElementById("tableFilter").value;
+
+  let data = [];
+
+  if(filter==="early"){
+    data = earlyData;
+  }
+  else if(filter==="feedback"){
+    data = feedbackData;
+  }
+  else if(filter==="config"){
+    data = configData;
+  }
+  else{
+    data = [
+      ...earlyData,
+      ...feedbackData,
+      ...configData
+    ];
+  }
+
+  if(!data.length){
+    alert("No data available to export.");
+    return;
+  }
+
+  const headers =
+    [...new Set(data.flatMap(row => Object.keys(row)))];
+
+  const csv = [
+    headers.join(","),
+    ...data.map(row =>
+      headers.map(header =>
+        `"${String(row[header] ?? "")
+          .replace(/"/g,'""')}"`
+      ).join(",")
+    )
+  ].join("\n");
+
+  const blob =
+    new Blob([csv],{type:"text/csv;charset=utf-8;"});
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const a =
+    document.createElement("a");
+
+  a.href = url;
+  a.download = "zeng-data.csv";
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
 
 async function checkSession(){
 
-  const {
-    data:{
-      session
-    }
-  } =
-  await supabaseClient.auth.getSession();
+  const {data} =
+    await supabaseClient.auth.getSession();
 
-  if(session){
-
+  if(data.session){
     showDashboard();
-
   }
-
 }
-
 
 checkSession();
 
